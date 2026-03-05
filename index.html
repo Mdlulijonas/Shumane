@@ -102,7 +102,6 @@
             height: 100%; 
             width: 100%; 
             display: block;
-            /* Force high-quality rendering */
             image-rendering: -webkit-optimize-contrast;
             image-rendering: crisp-edges;
         }
@@ -177,6 +176,11 @@
             height: 100%;
             border: 0;
         }
+        /* Appointment form styling */
+        .appointment-card {
+            background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .form-label i { color: var(--secondary); margin-right: 8px; }
     </style>
 </head>
 <body>
@@ -197,6 +201,7 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#training">Security Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#appointment">Book Appointment</a></li> <!-- New link -->
                     <li class="nav-item"><a class="nav-link" href="#verify">PSIRA Verify</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <li class="nav-item ms-lg-3"><a class="btn btn-cta" href="#application">Apply for course</a></li>
@@ -314,6 +319,66 @@
         </div>
     </section>
 
+    <!-- NEW: APPOINTMENT SECTION -->
+    <section id="appointment" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Book an Appointment</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="appointment-card" data-aos="zoom-in">
+                        <form id="appointmentForm">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-user"></i> Full Name *</label>
+                                    <input type="text" class="form-control form-control-lg" id="apptName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-envelope"></i> Email Address *</label>
+                                    <input type="email" class="form-control form-control-lg" id="apptEmail" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-phone"></i> Phone Number</label>
+                                    <input type="tel" class="form-control form-control-lg" id="apptPhone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-calendar"></i> Preferred Date *</label>
+                                    <input type="date" class="form-control form-control-lg" id="apptDate" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-clock"></i> Preferred Time *</label>
+                                    <input type="time" class="form-control form-control-lg" id="apptTime" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label"><i class="fa-regular fa-folder"></i> Reason for Appointment *</label>
+                                    <select class="form-select form-select-lg" id="apptReason" required>
+                                        <option value="" selected disabled>Select a reason</option>
+                                        <option>Security Services Inquiry</option>
+                                        <option>Medical Waste Management</option>
+                                        <option>Pest Control Services</option>
+                                        <option>Office Supply Quotation</option>
+                                        <option>Training / Course Enquiry</option>
+                                        <option>General Consultation</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label"><i class="fa-regular fa-message"></i> Additional Details (optional)</label>
+                                    <textarea class="form-control" id="apptDetails" rows="3" placeholder="Tell us more about your needs..."></textarea>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-cta btn-lg px-5" id="apptSubmitBtn">Confirm Appointment</button>
+                                </div>
+                                <div class="col-12">
+                                    <div id="apptAlert" class="text-center small"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PSIRA VERIFICATION SEARCH BAR -->
     <section id="verify" class="py-5">
         <div class="container">
@@ -336,7 +401,7 @@
         </div>
     </section>
 
-    <!-- APPLICATION FORM and CONTACT FORM -->
+    <!-- APPLICATION FORM and CONTACT FORM (existing) -->
     <section id="application" class="py-5 bg-white">
         <div class="container">
             <h2 class="section-title">Apply for a course / Request info</h2>
@@ -421,7 +486,7 @@
                     <img src="https://i.ibb.co/Mk9PJgq0/download-3.jpg" class="mb-3" alt="footer logo" style="height: 50px;" onerror="this.src='https://placehold.co/150x50/1a1a2e/white?text=SHUMANE'">
                     <p>Level 1 BBBEE · Security, Medical Waste, Pest Control & Office Supply.</p>
                 </div>
-                <div class="col-lg-2 col-md-4"><h6 class="text-white">Quick links</h6><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li></ul></div>
+                <div class="col-lg-2 col-md-4"><h6 class="text-white">Quick links</h6><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li><li><a href="#appointment">Appointment</a></li></ul></div>
                 <div class="col-lg-2 col-md-4"><h6 class="text-white">Services</h6><ul class="list-unstyled"><li><a href="#">Security</a></li><li><a href="#">Medical waste</a></li><li><a href="#">Pest control</a></li><li><a href="#">Office supply</a></li></ul></div>
                 <div class="col-lg-3 col-md-4"><h6 class="text-white">Legal</h6><ul class="list-unstyled"><li>Reg: 2014/123456/07</li><li>PSIRA 1234567</li><li>COIDA</li></ul></div>
             </div>
@@ -449,6 +514,7 @@
 
         (function(){ emailjs.init("OD6_2mGTpG9egRGl2"); })();
 
+        // PSIRA verification mock
         document.getElementById('verifyBtn').addEventListener('click', function(){
             let input = document.getElementById('psiraInput').value.trim();
             let resultDiv = document.getElementById('verificationResult');
@@ -459,6 +525,54 @@
             }
         });
 
+        // Appointment form submission
+        document.getElementById('appointmentForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const btn = document.getElementById('apptSubmitBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = 'Sending...';
+
+            // Gather form data
+            const params = {
+                to_email: 'admin@shumaneholdings.co.za',        // admin notification
+                user_email: document.getElementById('apptEmail').value,
+                from_name: document.getElementById('apptName').value,
+                phone: document.getElementById('apptPhone').value || 'Not provided',
+                appointment_date: document.getElementById('apptDate').value,
+                appointment_time: document.getElementById('apptTime').value,
+                reason: document.getElementById('apptReason').value,
+                details: document.getElementById('apptDetails').value || 'No additional details',
+                date: new Date().toLocaleString()
+            };
+
+            // Send email to admin (using template designed for admin notification)
+            emailjs.send('service_qd6iq79', 'template_appointment_admin', params)
+                .then(function(response) {
+                    // Now send confirmation email to user
+                    return emailjs.send('service_qd6iq79', 'template_appointment_user', {
+                        to_email: params.user_email,
+                        from_name: params.from_name,
+                        appointment_date: params.appointment_date,
+                        appointment_time: params.appointment_time,
+                        reason: params.reason
+                    });
+                })
+                .then(function(response) {
+                    document.getElementById('apptAlert').innerHTML = '<span class="text-success">✓ Appointment booked! A confirmation has been sent to your email.</span>';
+                    document.getElementById('appointmentForm').reset();
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    document.getElementById('apptAlert').innerHTML = '<span class="text-danger">✗ Something went wrong. Please try again or WhatsApp us.</span>';
+                })
+                .finally(function() {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                });
+        });
+
+        // Existing application form
         document.getElementById('applicationForm').addEventListener('submit', function(e){
             e.preventDefault();
             const btn = document.getElementById('appSubmit');
@@ -480,6 +594,7 @@
             }).finally(()=>{ btn.disabled = false; btn.innerHTML = 'Submit application'; });
         });
 
+        // Existing contact form
         document.getElementById('contactForm').addEventListener('submit', function(e){
             e.preventDefault();
             const btn = document.getElementById('contactSubmit');
@@ -499,5 +614,9 @@
             }).finally(()=>{ btn.disabled = false; btn.innerHTML = 'Send message'; });
         });
     </script>
+    <!-- Note: You need to create two EmailJS templates: 
+         - "template_appointment_admin" with parameter to_email (admin)
+         - "template_appointment_user" with parameter to_email (user) 
+         and replace the template IDs in the code above. -->
 </body>
 </html>
