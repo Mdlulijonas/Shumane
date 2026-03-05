@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shumane Holdings | Mining · Security · Training · Pest · Medical</title>
+    <title>Shumane Holdings | Security · Medical Waste · Pest Control · Office Supply</title>
     <!-- Meta tags (SEO / geo) -->
-    <meta name="description" content="Shumane Holdings: mining supply, PSIRA accredited security training, pest control, medical waste management. Serving Winterveld, Mabopane, Soshanguve.">
-    <meta name="keywords" content="Shumane Holdings, PSIRA accreditation, security courses Winterveld, pest control Mabopane, medical waste disposal, mining supply, training">
+    <meta name="description" content="Shumane Holdings: PSIRA accredited security training, medical waste management, pest control, and office stationery supply. Serving Mabopane, Winterveld, Soshanguve.">
+    <meta name="keywords" content="Shumane Holdings, PSIRA accreditation, security courses, medical waste disposal, pest control, office supplies Mabopane, stationery">
     <meta name="geo.region" content="ZA-GP">
-    <meta name="geo.placename" content="Winterveld, Mabopane, Soshanguve">
+    <meta name="geo.placename" content="Mabopane, Pretoria, Winterveld, Soshanguve">
     <link rel="canonical" href="https://shumaneholdings.co.za/">
     <!-- Open Graph -->
-    <meta property="og:title" content="Shumane Holdings – Mining, Security, Training & Specialist Services">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1200">
+    <meta property="og:title" content="Shumane Holdings – Security, Medical Waste, Pest Control & Office Supply">
+    <meta property="og:image" content="https://images.pexels.com/photos/7242123/pexels-photo-7242123.jpeg?w=1200">
     <!-- Bootstrap, Fonts, Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,25 +24,42 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #f4f7fc;
+            background: #fff;
             color: #1e2b37;
             padding-top: 80px;
         }
-        /* colors adapted from shumaneholdings.co.za (original site: dark green/blue & gold) */
+        /* New color theme: pink, white, orange, purple */
         :root {
-            --primary: #1e4a5f;      /* deep teal from original site */
-            --secondary: #b78c4a;     /* gold/ochre accent */
-            --accent: #2e7d5e;        /* green from original logo feel */
-            --light-bg: #f0f4f8;
-            --gradient-primary: linear-gradient(135deg, #1e4a5f, #1a3e4f);
-            --gradient-secondary: linear-gradient(135deg, #b78c4a, #9e6f2e);
+            --primary: #d63384;        /* vibrant pink */
+            --secondary: #fd7e14;       /* orange */
+            --accent: #6f42c1;          /* purple */
+            --light-bg: #fdf4f9;        /* very light pink */
+            --gradient-primary: linear-gradient(135deg, #d63384, #b22d6b);
+            --gradient-secondary: linear-gradient(135deg, #fd7e14, #e86b00);
             --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.1);
         }
+        /* professional background images on scroll (parallax effect) */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            isolation: isolate;
+        }
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+        /* navbar */
         .navbar {
             background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .navbar-brand img { height: 55px; } /* will hold actual logo */
+        .navbar-brand img { height: 55px; }
         .navbar-nav .nav-link {
             font-weight: 500; color: var(--primary) !important;
             margin: 0 10px; position: relative;
@@ -57,11 +74,11 @@
         .btn-cta {
             background: var(--gradient-secondary); border: none; color: white;
             font-weight: 600; padding: 10px 28px; border-radius: 40px;
-            box-shadow: 0 6px 15px rgba(183,140,74,0.3); transition: 0.2s;
+            box-shadow: 0 6px 15px rgba(253,126,20,0.3); transition: 0.2s;
         }
-        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(183,140,74,0.4); }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(253,126,20,0.4); }
         
-        /* hero carousel - fixed image display */
+        /* hero carousel */
         .carousel-item { height: 85vh; min-height: 600px; }
         .carousel-item img { 
             object-fit: cover; 
@@ -70,7 +87,8 @@
             display: block;
         }
         .carousel-caption {
-            background: rgba(30,74,95,0.85); backdrop-filter: blur(5px);
+            background: rgba(214,51,132,0.85); /* pink with opacity */
+            backdrop-filter: blur(5px);
             border-radius: 25px; padding: 40px; max-width: 850px;
             bottom: 20%; left: 15%; right: 15%; border-left: 6px solid var(--secondary);
             text-align: left;
@@ -91,22 +109,18 @@
             border: 1px solid rgba(0,0,0,0.02); height: 100%;
         }
         .service-card:hover {
-            transform: translateY(-12px); border-color: var(--secondary);
-            box-shadow: 0 25px 35px -8px rgba(30,74,95,0.15);
+            transform: translateY(-12px); border-color: var(--primary);
+            box-shadow: 0 25px 35px -8px rgba(214,51,132,0.15);
         }
-        .service-icon { background: #eef2f7; width: 80px; height: 80px;
+        .service-icon { background: #fce4f0; width: 80px; height: 80px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 25px; font-size: 2.3rem; color: var(--secondary);
-        }
-        .price-badge {
-            background: var(--gradient-secondary); color: white; padding: 5px 15px;
-            border-radius: 50px; font-weight: 600; font-size: 0.9rem;
+            margin: 0 auto 25px; font-size: 2.3rem; color: var(--primary);
         }
         .verify-card {
-            background: #e9edf2; border-left: 6px solid var(--secondary);
+            background: #fce4f0; border-left: 6px solid var(--secondary);
             padding: 20px; border-radius: 16px;
         }
-        footer { background: #0e2a3b; color: #e0e9f0; padding: 40px 0 20px; }
+        footer { background: #1a1a2e; color: #e0e9f0; padding: 40px 0 20px; }
         footer a { color: #cbd5e0; text-decoration: none; }
         .social-icons a {
             background: rgba(255,255,255,0.08); display: inline-flex; width: 42px; height: 42px;
@@ -126,15 +140,23 @@
             opacity: 0; visibility: hidden; transition: 0.2s; z-index: 98;
         }
         .back-to-top.active { opacity: 1; visibility: visible; }
-        /* PSIRA verification */
-        .verification-result { font-size: 1rem; margin-top: 10px; }
-        .valid { color: #1e824c; } .invalid { color: #b34a4a; }
-        /* geo chips */
         .geo-chip {
             background: white; border: 1px solid #dde2e8; border-radius: 50px;
             padding: 8px 18px; font-weight: 600; color: var(--primary);
         }
         .geo-chip i { color: var(--secondary); margin-right: 6px; }
+        /* live map embed */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -142,8 +164,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#home">
-                <!-- fixed logo: using a reliable placeholder that always shows. If original fails, this shows text -->
-                <img src="https://placehold.co/200x60/1e4a5f/white?text=SHUMANE+HOLDINGS" alt="Shumane Holdings">
+                <img src="https://placehold.co/200x60/d63384/white?text=SHUMANE+HOLDINGS" alt="Shumane Holdings">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -162,7 +183,7 @@
         </div>
     </nav>
 
-    <!-- Hero Carousel - ALL IMAGES REPLACED WITH WORKING LINKS -->
+    <!-- Hero Carousel - strictly: security, medical waste, pest control, stationary office supply -->
     <section id="home" class="hero-carousel">
         <div id="shumaneCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -170,28 +191,23 @@
                 <button type="button" data-bs-target="#shumaneCarousel" data-bs-slide-to="1"></button>
                 <button type="button" data-bs-target="#shumaneCarousel" data-bs-slide-to="2"></button>
                 <button type="button" data-bs-target="#shumaneCarousel" data-bs-slide-to="3"></button>
-                <button type="button" data-bs-target="#shumaneCarousel" data-bs-slide-to="4"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mining and engineering">
-                    <div class="carousel-caption"><h1>Shumane Holdings</h1><p class="lead">Mining · Security · Training · Pest Control · Medical Waste</p><p>Trusted partner across Winterveld, Mabopane, Soshanguve.</p></div>
-                </div>
-                <div class="carousel-item">
                     <img src="https://images.pexels.com/photos/7242123/pexels-photo-7242123.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Security officers">
-                    <div class="carousel-caption"><h1>PSIRA accredited training</h1><p class="lead">Grades E, D, C, B, A & Firearm training</p></div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.pexels.com/photos/4239070/pexels-photo-4239070.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Pest control">
-                    <div class="carousel-caption"><h1>Professional pest management</h1><p class="lead">Residential & industrial · Fumigation · Termite control</p></div>
+                    <div class="carousel-caption"><h1>Shumane Holdings</h1><p class="lead">Security · Medical Waste · Pest Control · Office Supply</p><p>Trusted partner across Mabopane, Winterveld, Soshanguve.</p></div>
                 </div>
                 <div class="carousel-item">
                     <img src="https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Medical waste">
                     <div class="carousel-caption"><h1>Medical waste disposal</h1><p class="lead">Compliant · safe · sharps & biohazard removal</p></div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Electrical maintenance">
-                    <div class="carousel-caption"><h1>Electrical & maintenance</h1><p class="lead">Installations & maintenance (still available)</p></div>
+                    <img src="https://images.pexels.com/photos/4239070/pexels-photo-4239070.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Pest control">
+                    <div class="carousel-caption"><h1>Professional pest management</h1><p class="lead">Residential & industrial · Fumigation · Termite control</p></div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.pexels.com/photos/4464435/pexels-photo-4464435.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Office stationery supply">
+                    <div class="carousel-caption"><h1>Office stationery supply</h1><p class="lead">All your office needs · quality products · delivery</p></div>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#shumaneCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
@@ -199,56 +215,54 @@
         </div>
     </section>
 
-    <!-- Geolocation chips -->
+    <!-- Geolocation chips (updated) -->
     <section class="py-4 bg-white border-bottom">
         <div class="container d-flex flex-wrap align-items-center gap-3">
             <span class="fw-bold text-primary"><i class="fa-solid fa-location-dot me-2 text-secondary"></i>Proudly serving:</span>
-            <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Winterveld</span>
             <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Mabopane</span>
+            <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Winterveld</span>
             <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Soshanguve</span>
             <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Ga-Rankuwa</span>
             <span class="geo-chip"><i class="fa-solid fa-map-pin"></i>Hammanskraal</span>
         </div>
     </section>
 
-    <!-- About Section (image fixed) -->
-    <section id="about" class="py-5 bg-light">
+    <!-- About Section with parallax background -->
+    <section id="about" class="py-5 parallax-section" style="background-image: url('https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=1600');">
         <div class="container">
             <h2 class="section-title">About Shumane Holdings</h2>
-            <div class="row align-items-center">
+            <div class="row align-items-center bg-white p-4 rounded-4 shadow" style="--bs-bg-opacity: 0.9;">
                 <div class="col-lg-6" data-aos="fade-right">
                     <img src="https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-fluid rounded-4 shadow" alt="Shumane team">
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <p class="lead text-primary fw-semibold">Rooted in community, built on integrity.</p>
-                    <p>Shumane Holdings delivers mining supplies, security services, accredited PSIRA training, pest control, and medical waste management. Level 1 BBBEE, fully compliant.</p>
+                    <p>Shumane Holdings delivers PSIRA accredited security training, medical waste management, pest control, and office stationery supply. Level 1 BBBEE, fully compliant. Our head office is now in Mabopane.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES (updated: security, medical waste, pest control, stationary office supply) -->
     <section id="services" class="py-5">
         <div class="container">
             <h2 class="section-title">Our Core Services</h2>
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-truck"></i></div><h4>Mining & industrial supply</h4><p>PPE, mining consumables, ventilation. Fast delivery Rosslyn, Brits.</p></div></div>
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div><h4>Security & guarding</h4><p>PSIRA registered officers, static & mobile patrols.</p></div></div>
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-bolt"></i></div><h4>Electrical engineering</h4><p>Industrial installations, fault-finding, maintenance.</p></div></div>
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-bug"></i></div><h4>Pest control</h4><p>Residential, commercial fumigation, termite, rodent control. Safe & effective.</p></div></div>
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-trash-can"></i></div><h4>Medical waste management</h4><p>Biohazard, sharps disposal, compliant medical waste collection.</p></div></div>
-                <div class="col-md-6 col-lg-4"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-chalkboard-user"></i></div><h4>Skills training</h4><p>Security grades, firearm, first aid, computer literacy. Accredited.</p></div></div>
+                <div class="col-md-6 col-lg-3"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-shield-halved"></i></div><h4>Security & guarding</h4><p>PSIRA registered officers, static & mobile patrols, security training.</p></div></div>
+                <div class="col-md-6 col-lg-3"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-trash-can"></i></div><h4>Medical waste management</h4><p>Biohazard, sharps disposal, compliant medical waste collection.</p></div></div>
+                <div class="col-md-6 col-lg-3"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-bug"></i></div><h4>Pest control</h4><p>Residential, commercial fumigation, termite, rodent control. Safe & effective.</p></div></div>
+                <div class="col-md-6 col-lg-3"><div class="service-card"><div class="service-icon"><i class="fa-solid fa-pen-to-square"></i></div><h4>Office stationery supply</h4><p>All office essentials, printing paper, writing materials, and furniture.</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- SECURITY COURSES (price list) with fixed image -->
-    <section id="training" class="py-5 bg-light">
+    <!-- SECURITY COURSES (price list) with parallax background -->
+    <section id="training" class="py-5 parallax-section" style="background-image: url('https://images.pexels.com/photos/618158/pexels-photo-618158.jpeg?auto=compress&cs=tinysrgb&w=1600');">
         <div class="container">
-            <h2 class="section-title">PSIRA Security Training & Firearm</h2>
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="card shadow p-4">
+            <div class="bg-white p-4 rounded-4 shadow" style="--bs-bg-opacity: 0.9;">
+                <h2 class="section-title">PSIRA Security Training & Firearm</h2>
+                <div class="row">
+                    <div class="col-lg-7">
                         <table class="table table-borderless">
                             <tr><td>Grade E</td><td class="fw-bold">R600.00</td></tr>
                             <tr><td>Grade D</td><td>R700.00</td></tr>
@@ -266,9 +280,9 @@
                         </table>
                         <p class="mt-3"><i class="fa-regular fa-circle-check text-success"></i> PSIRA accredited instructors. Next intake 15 March 2026.</p>
                     </div>
-                </div>
-                <div class="col-lg-5" data-aos="fade-left">
-                    <img src="https://images.pexels.com/photos/618158/pexels-photo-618158.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-fluid rounded-4" alt="Training">
+                    <div class="col-lg-5" data-aos="fade-left">
+                        <img src="https://images.pexels.com/photos/618158/pexels-photo-618158.jpeg?auto=compress&cs=tinysrgb&w=800" class="img-fluid rounded-4" alt="Training">
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,26 +352,34 @@
         </div>
     </section>
 
-    <!-- Contact & Location with fixed map placeholder -->
-    <section id="contact" class="py-5" style="background:#eef2f6;">
+    <!-- Contact & Location with new address and live map -->
+    <section id="contact" class="py-5" style="background:#fce4f0;">
         <div class="container">
             <h2 class="section-title">Contact Shumane Holdings</h2>
             <div class="row">
                 <div class="col-md-6" data-aos="fade-right">
                     <div class="bg-white p-4 rounded-4">
-                        <h5><i class="fa-solid fa-location-dot me-2 text-secondary"></i>Winterveld HQ</h5><p>Erf 455, Morula Sun Road, Winterveld, 0198</p>
-                        <h5><i class="fa-regular fa-building me-2"></i>Mabopane satellite</h5><p>23 Aubrey Matlala Street, Block F</p>
-                        <h5><i class="fa-regular fa-phone me-2"></i>Tel: 012 345 6789 · WhatsApp: 072 123 4567</h5>
+                        <h5><i class="fa-solid fa-location-dot me-2 text-secondary"></i>Head Office (Mabopane)</h5>
+                        <p>Office no:5 1st Floor, Old Mutual Building, Mabopane, PRETORIA, 0190</p>
+                        <h5><i class="fa-regular fa-phone me-2"></i>Tel: 012 345 6789</h5>
+                        <h5><i class="fa-brands fa-whatsapp me-2 text-success"></i>WhatsApp: 065 593 8665</h5>
                         <p>Email: info@shumaneholdings.co.za</p>
-                        <div class="social-icons"><a href="#"><i class="fa-brands fa-facebook-f"></i></a><a href="#"><i class="fa-brands fa-x-twitter"></i></a><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></div>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
                     <div class="bg-white p-4 rounded-4">
                         <h5>Hours</h5><p>Mon-Fri 07:30-17:00 · Sat 08:00-13:00 · 24/7 emergency</p>
-                        <hr><h5>Service area map</h5>
-                        <!-- Fixed map image with working link -->
-                        <img src="https://placehold.co/600x250/e2e8f0/1e4a5f?text=Winterveld,+Mabopane,+Soshanguve+Area" class="img-fluid rounded-3" alt="service map">
+                        <hr>
+                        <h5>Live map</h5>
+                        <div class="map-container">
+                            <!-- Google Maps embed for Old Mutual Building, Mabopane (approx coordinates) -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.789567114253!2d28.107315!3d-25.507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebfc5a1b2c1c2f3%3A0x8e8e8e8e8e8e8e8e!2sOld%20Mutual%20Building%2C%20Mabopane!5e0!3m2!1sen!2sza!4v1700000000000" allowfullscreen loading="lazy"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -368,9 +390,9 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-5"><img src="https://placehold.co/150x50/0e2a3b/white?text=SHUMANE+HOLDINGS" class="mb-3" alt="footer logo"><p>Level 1 BBBEE · Mining, Security, Training, Pest & Medical Waste.</p></div>
+                <div class="col-lg-5"><img src="https://placehold.co/150x50/1a1a2e/white?text=SHUMANE+HOLDINGS" class="mb-3" alt="footer logo"><p>Level 1 BBBEE · Security, Medical Waste, Pest Control & Office Supply.</p></div>
                 <div class="col-lg-2 col-md-4"><h6 class="text-white">Quick links</h6><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li></ul></div>
-                <div class="col-lg-2 col-md-4"><h6 class="text-white">Services</h6><ul class="list-unstyled"><li><a href="#">Mining supply</a></li><li><a href="#">Security</a></li><li><a href="#">Pest control</a></li><li><a href="#">Medical waste</a></li></ul></div>
+                <div class="col-lg-2 col-md-4"><h6 class="text-white">Services</h6><ul class="list-unstyled"><li><a href="#">Security</a></li><li><a href="#">Medical waste</a></li><li><a href="#">Pest control</a></li><li><a href="#">Office supply</a></li></ul></div>
                 <div class="col-lg-3 col-md-4"><h6 class="text-white">Legal</h6><ul class="list-unstyled"><li>Reg: 2014/123456/07</li><li>PSIRA 1234567</li><li>COIDA</li></ul></div>
             </div>
             <hr class="opacity-25">
@@ -381,8 +403,8 @@
         </div>
     </footer>
 
-    <!-- WhatsApp & back to top -->
-    <a href="https://wa.me/27721234567" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    <!-- WhatsApp & back to top (updated number) -->
+    <a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
     <a href="#" class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
 
     <!-- Scripts -->
@@ -390,16 +412,13 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 700, once: true });
-        // back to top
         window.addEventListener('scroll', ()=>{
             document.getElementById('backToTop').classList.toggle('active', window.scrollY > 350);
         });
         document.getElementById('backToTop').addEventListener('click', (e)=>{ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 
-        // EmailJS init (public key)
         (function(){ emailjs.init("OD6_2mGTpG9egRGl2"); })();
 
-        // PSIRA verification mock
         document.getElementById('verifyBtn').addEventListener('click', function(){
             let input = document.getElementById('psiraInput').value.trim();
             let resultDiv = document.getElementById('verificationResult');
@@ -410,7 +429,6 @@
             }
         });
 
-        // Application form send via emailjs 
         document.getElementById('applicationForm').addEventListener('submit', function(e){
             e.preventDefault();
             const btn = document.getElementById('appSubmit');
@@ -432,7 +450,6 @@
             }).finally(()=>{ btn.disabled = false; btn.innerHTML = 'Submit application'; });
         });
 
-        // Contact form 
         document.getElementById('contactForm').addEventListener('submit', function(e){
             e.preventDefault();
             const btn = document.getElementById('contactSubmit');
