@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- EmailJS library -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -53,48 +51,77 @@
             background: transparent;
             z-index: -1;
         }
-        /* Navbar */
+        /* Stylish Navbar */
         .navbar {
-            background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(214,51,132,0.1);
+            padding: 12px 0;
+            transition: all 0.3s ease;
         }
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .navbar-brand img { 
-            height: 50px; 
+            height: 55px; 
             width: auto;
+            border-radius: 8px;
+            transition: transform 0.3s;
         }
+        .navbar-brand img:hover { transform: scale(1.05); }
         .brand-text {
             font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #000000; /* Black */
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #000000;
             letter-spacing: -0.02em;
             margin: 0;
             line-height: 1.2;
+            background: linear-gradient(135deg, #d63384 0%, #6f42c1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .navbar-nav .nav-link {
-            font-weight: 500; color: var(--primary) !important;
-            margin: 0 10px; position: relative;
+            font-weight: 600;
+            color: #2d2d2d !important;
+            margin: 0 8px;
+            padding: 10px 18px !important;
+            border-radius: 30px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
         }
-        .navbar-nav .nav-link::after {
-            content: ''; position: absolute; width: 0; height: 2px;
-            bottom: 0; left: 0; background: var(--secondary);
-            transition: width 0.3s;
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background: var(--gradient-secondary);
+            color: white !important;
+            box-shadow: 0 6px 15px rgba(253,126,20,0.3);
+            transform: translateY(-2px);
         }
-        .navbar-nav .nav-link:hover::after,
-        .navbar-nav .nav-link.active::after { width: 100%; }
+        .navbar-nav .nav-link::after { display: none; } /* remove underline */
         .btn-cta {
-            background: var(--gradient-secondary); border: none; color: white;
-            font-weight: 600; padding: 10px 28px; border-radius: 40px;
-            box-shadow: 0 6px 15px rgba(253,126,20,0.3); transition: 0.2s;
+            background: var(--gradient-secondary);
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 10px 28px;
+            border-radius: 40px;
+            box-shadow: 0 6px 15px rgba(253,126,20,0.3);
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
         }
-        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 20px rgba(253,126,20,0.4); }
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(253,126,20,0.4);
+            background: linear-gradient(135deg, #e86b00, #fd7e14);
+        }
         
-        /* Hero carousel - images fill nicely with high resolution */
+        /* Hero carousel */
         .carousel-item { height: 85vh; min-height: 600px; }
         .carousel-item img { 
             object-fit: cover;
@@ -103,7 +130,6 @@
             width: 100%; 
             display: block;
             image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
         }
         .carousel-caption {
             background: rgba(214,51,132,0.85);
@@ -135,9 +161,11 @@
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             margin: 0 auto 25px; font-size: 2.3rem; color: var(--primary);
         }
-        .verify-card {
-            background: #fce4f0; border-left: 6px solid var(--secondary);
-            padding: 20px; border-radius: 16px;
+        .company-badge {
+            background: white; border-radius: 50px; padding: 8px 20px;
+            display: inline-block; margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
         }
         footer { background: #1a1a2e; color: #e0e9f0; padding: 40px 0 20px; }
         footer a { color: #cbd5e0; text-decoration: none; }
@@ -151,6 +179,7 @@
             position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white;
             width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 2rem; z-index: 99;
+            box-shadow: 0 6px 20px rgba(37,211,102,0.4);
         }
         .back-to-top {
             position: fixed; bottom: 30px; left: 30px; background: var(--primary);
@@ -164,31 +193,22 @@
             padding: 8px 18px; font-weight: 600; color: var(--primary);
         }
         .geo-chip i { color: var(--secondary); margin-right: 6px; }
-        /* Live map embed */
-        .map-container {
-            width: 100%;
-            height: 250px;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        /* Appointment form styling */
-        .appointment-card {
-            background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
+        .map-container { width: 100%; height: 250px; border-radius: 16px; overflow: hidden; }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+        .appointment-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .form-label i { color: var(--secondary); margin-right: 8px; }
+        /* registration numbers display */
+        .reg-badge {
+            background: #fce4f0; border-radius: 12px; padding: 15px; margin-top: 15px;
+            border-left: 4px solid var(--secondary);
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation with new logo and black text -->
+    <!-- Stylish Navigation Bar -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#home">
-                <!-- Logo from user (download (3)) -->
                 <img src="https://i.ibb.co/Mk9PJgq0/download-3.jpg" alt="Shumane Holdings" onerror="this.src='https://placehold.co/200x60/d63384/white?text=SHUMANE'">
                 <span class="brand-text">Shumane Holdings</span>
             </a>
@@ -201,8 +221,7 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="#training">Security Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#appointment">Book Appointment</a></li> <!-- New link -->
-                    <li class="nav-item"><a class="nav-link" href="#verify">PSIRA Verify</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#appointment">Book Appointment</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     <li class="nav-item ms-lg-3"><a class="btn btn-cta" href="#application">Apply for course</a></li>
                 </ul>
@@ -210,7 +229,7 @@
         </div>
     </nav>
 
-    <!-- Hero Carousel - using the exact Pexels images requested -->
+    <!-- Hero Carousel (images unchanged) -->
     <section id="home" class="hero-carousel">
         <div id="shumaneCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -221,22 +240,18 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <!-- Slide 1 (Security): pexels-photo-7714736.jpeg -->
                     <img src="https://images.pexels.com/photos/7714736/pexels-photo-7714736.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Security training">
                     <div class="carousel-caption"><h1>Shumane Holdings</h1><p class="lead">Security · Medical Waste · Pest Control · Office Supply</p><p>Trusted partner across Mabopane, Winterveld, Soshanguve.</p></div>
                 </div>
                 <div class="carousel-item">
-                    <!-- Slide 2 (Medical Waste): pexels-photo-10058479.jpeg -->
                     <img src="https://images.pexels.com/photos/10058479/pexels-photo-10058479.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Medical waste">
                     <div class="carousel-caption"><h1>Medical waste disposal</h1><p class="lead">Compliant · safe · sharps & biohazard removal</p></div>
                 </div>
                 <div class="carousel-item">
-                    <!-- Slide 3 (Pest Control): pexels-photo-35303785.jpeg -->
                     <img src="https://images.pexels.com/photos/35303785/pexels-photo-35303785.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Pest control">
                     <div class="carousel-caption"><h1>Professional pest management</h1><p class="lead">Residential & industrial · Fumigation · Termite control</p></div>
                 </div>
                 <div class="carousel-item">
-                    <!-- Slide 4 (Office Supply): pexels-photo-8296946.jpeg -->
                     <img src="https://images.pexels.com/photos/8296946/pexels-photo-8296946.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Office stationery supply">
                     <div class="carousel-caption"><h1>Office stationery supply</h1><p class="lead">All your office needs · quality products · delivery</p></div>
                 </div>
@@ -258,7 +273,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section (background picture under section) -->
     <section id="about" class="py-5 parallax-section" style="background-image: url('https://images.pexels.com/photos/273250/pexels-photo-273250.jpeg?auto=compress&cs=tinysrgb&w=1600');">
         <div class="container">
             <h2 class="section-title">About Shumane Holdings</h2>
@@ -268,7 +283,12 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <p class="lead text-primary fw-semibold">Rooted in community, built on integrity.</p>
-                    <p>Shumane Holdings delivers PSIRA accredited security training, medical waste management, pest control, and office stationery supply. Level 1 BBBEE, fully compliant. Our head office is now in Mabopane.</p>
+                    <p>Shumane Holdings delivers PSIRA accredited security training, medical waste management, pest control, and office stationery supply. Level 1 BBBEE, fully compliant. Our head office is in Mabopane.</p>
+                    <!-- Company registration numbers displayed -->
+                    <div class="reg-badge mt-3">
+                        <p class="mb-1"><strong><i class="fa-regular fa-building"></i> Registration:</strong> 2020/620149/07</p>
+                        <p class="mb-0"><strong><i class="fa-solid fa-shield-halved"></i> PSIRA:</strong> 3171761 / T4334402</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -287,7 +307,7 @@
         </div>
     </section>
 
-    <!-- SECURITY COURSES (price list) -->
+    <!-- SECURITY COURSES (price list) with new combo options -->
     <section id="training" class="py-5 parallax-section" style="background-image: url('https://images.pexels.com/photos/273250/pexels-photo-273250.jpeg?auto=compress&cs=tinysrgb&w=1600');">
         <div class="container">
             <div class="bg-white p-4 rounded-4 shadow" style="--bs-bg-opacity: 0.9;">
@@ -308,6 +328,8 @@
                             <tr><td>Hand Gun</td><td>R2500.00</td></tr>
                             <tr><td>Shot Gun</td><td>R2500.00</td></tr>
                             <tr><td>Rifle</td><td>R2500.00</td></tr>
+                            <tr class="table-warning fw-bold"><td>Combo any 2 guns</td><td>R4500.00</td></tr>
+                            <tr class="table-warning fw-bold"><td>Combo all 3 guns</td><td>R5500.00</td></tr>
                         </table>
                         <p class="mt-3"><i class="fa-regular fa-circle-check text-success"></i> PSIRA accredited instructors. Next intake 15 March 2026.</p>
                     </div>
@@ -319,38 +341,38 @@
         </div>
     </section>
 
-    <!-- NEW: APPOINTMENT SECTION -->
+    <!-- APPOINTMENT SECTION (mailto form) -->
     <section id="appointment" class="py-5 bg-light">
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Book an Appointment</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="appointment-card" data-aos="zoom-in">
-                        <form id="appointmentForm">
+                        <form action="mailto:info@shumaneholdings.co.za" method="post" enctype="text/plain">
                             <div class="row g-4">
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-user"></i> Full Name *</label>
-                                    <input type="text" class="form-control form-control-lg" id="apptName" required>
+                                    <input type="text" name="Full Name" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-envelope"></i> Email Address *</label>
-                                    <input type="email" class="form-control form-control-lg" id="apptEmail" required>
+                                    <input type="email" name="Email" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-phone"></i> Phone Number</label>
-                                    <input type="tel" class="form-control form-control-lg" id="apptPhone">
+                                    <input type="tel" name="Phone" class="form-control form-control-lg">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-calendar"></i> Preferred Date *</label>
-                                    <input type="date" class="form-control form-control-lg" id="apptDate" required>
+                                    <input type="date" name="Preferred Date" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-clock"></i> Preferred Time *</label>
-                                    <input type="time" class="form-control form-control-lg" id="apptTime" required>
+                                    <input type="time" name="Preferred Time" class="form-control form-control-lg" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label"><i class="fa-regular fa-folder"></i> Reason for Appointment *</label>
-                                    <select class="form-select form-select-lg" id="apptReason" required>
+                                    <select name="Reason" class="form-select form-select-lg" required>
                                         <option value="" selected disabled>Select a reason</option>
                                         <option>Security Services Inquiry</option>
                                         <option>Medical Waste Management</option>
@@ -362,14 +384,14 @@
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label"><i class="fa-regular fa-message"></i> Additional Details (optional)</label>
-                                    <textarea class="form-control" id="apptDetails" rows="3" placeholder="Tell us more about your needs..."></textarea>
+                                    <label class="form-label"><i class="fa-regular fa-message"></i> Additional Details</label>
+                                    <textarea name="Additional Details" class="form-control" rows="3"></textarea>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-cta btn-lg px-5" id="apptSubmitBtn">Confirm Appointment</button>
+                                    <button type="submit" class="btn btn-cta btn-lg px-5">Confirm Appointment</button>
                                 </div>
                                 <div class="col-12">
-                                    <div id="apptAlert" class="text-center small"></div>
+                                    <p class="small text-muted text-center">Your email client will open to send this request. We'll confirm shortly.</p>
                                 </div>
                             </div>
                         </form>
@@ -379,29 +401,7 @@
         </div>
     </section>
 
-    <!-- PSIRA VERIFICATION SEARCH BAR -->
-    <section id="verify" class="py-5">
-        <div class="container">
-            <h2 class="section-title">Verify PSIRA Accreditation</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="verify-card">
-                        <p class="mb-2 fw-bold">Enter PSIRA number to verify (demo):</p>
-                        <div class="input-group mb-3">
-                            <input type="text" id="psiraInput" class="form-control form-control-lg" placeholder="e.g., 1234567" value="1234567">
-                            <button class="btn btn-cta" type="button" id="verifyBtn">Verify</button>
-                        </div>
-                        <div id="verificationResult" class="verification-result fw-semibold">
-                            <i class="fa-regular fa-circle-check text-success"></i> PSIRA 1234567 is ACTIVE (Grade A) — valid until 2027.
-                        </div>
-                        <p class="small text-muted mt-2">*Demo: any 7-digit number shows valid. We’ll integrate real PSIRA API soon.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- APPLICATION FORM and CONTACT FORM (existing) -->
+    <!-- APPLICATION FORM (mailto) and CONTACT FORM (mailto) -->
     <section id="application" class="py-5 bg-white">
         <div class="container">
             <h2 class="section-title">Apply for a course / Request info</h2>
@@ -410,19 +410,20 @@
                 <div class="col-md-6">
                     <div class="card shadow p-4">
                         <h4 class="mb-3">Training application</h4>
-                        <form id="applicationForm">
-                            <div class="mb-3"><input type="text" class="form-control" id="appName" placeholder="Full name" required></div>
-                            <div class="mb-3"><input type="email" class="form-control" id="appEmail" placeholder="Email" required></div>
-                            <div class="mb-3"><input type="tel" class="form-control" id="appPhone" placeholder="Phone" required></div>
+                        <form action="mailto:info@shumaneholdings.co.za" method="post" enctype="text/plain">
+                            <div class="mb-3"><input type="text" name="Full Name" class="form-control" placeholder="Full name" required></div>
+                            <div class="mb-3"><input type="email" name="Email" class="form-control" placeholder="Email" required></div>
+                            <div class="mb-3"><input type="tel" name="Phone" class="form-control" placeholder="Phone" required></div>
                             <div class="mb-3">
-                                <select class="form-select" id="appCourse">
+                                <select name="Course" class="form-select">
                                     <option>Grade E</option><option>Grade D</option><option>Grade C</option><option>Grade E,D,C combo</option>
                                     <option>Grade B</option><option>Grade A</option><option>Full Grades</option>
                                     <option>Hand Gun</option><option>Shot Gun</option><option>Rifle</option>
+                                    <option>Combo any 2 guns</option><option>Combo all 3 guns</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-cta w-100" id="appSubmit">Submit application</button>
-                            <div id="appAlert" class="small mt-2"></div>
+                            <button type="submit" class="btn btn-cta w-100">Submit application</button>
+                            <p class="small text-muted mt-2">Your email client will open.</p>
                         </form>
                     </div>
                 </div>
@@ -430,12 +431,12 @@
                 <div class="col-md-6">
                     <div class="card shadow p-4">
                         <h4 class="mb-3">General enquiry</h4>
-                        <form id="contactForm">
-                            <div class="mb-3"><input type="text" class="form-control" id="contactName" placeholder="Your name" required></div>
-                            <div class="mb-3"><input type="email" class="form-control" id="contactEmail" placeholder="Email" required></div>
-                            <div class="mb-3"><textarea class="form-control" id="contactMessage" rows="3" placeholder="Message (e.g., pest control quote, medical waste inquiry)" required></textarea></div>
-                            <button type="submit" class="btn btn-cta w-100" id="contactSubmit">Send message</button>
-                            <div id="contactAlert" class="small mt-2"></div>
+                        <form action="mailto:info@shumaneholdings.co.za" method="post" enctype="text/plain">
+                            <div class="mb-3"><input type="text" name="Your Name" class="form-control" placeholder="Your name" required></div>
+                            <div class="mb-3"><input type="email" name="Email" class="form-control" placeholder="Email" required></div>
+                            <div class="mb-3"><textarea name="Message" class="form-control" rows="3" placeholder="Your message" required></textarea></div>
+                            <button type="submit" class="btn btn-cta w-100">Send message</button>
+                            <p class="small text-muted mt-2">Your email client will open.</p>
                         </form>
                     </div>
                 </div>
@@ -443,7 +444,7 @@
         </div>
     </section>
 
-    <!-- Contact & Location with exact address and live map -->
+    <!-- Contact & Location with updated phone number and live map -->
     <section id="contact" class="py-5" style="background:#fce4f0;">
         <div class="container">
             <h2 class="section-title">Contact Shumane Holdings</h2>
@@ -452,10 +453,14 @@
                     <div class="bg-white p-4 rounded-4">
                         <h5><i class="fa-solid fa-location-dot me-2 text-secondary"></i>Head Office (Mabopane)</h5>
                         <p><strong>Office no:5 1st Floor, Old Mutual Building, Mabopane, PRETORIA, 0190</strong></p>
-                        <h5><i class="fa-regular fa-phone me-2"></i>Tel: 012 345 6789</h5>
+                        <h5><i class="fa-regular fa-phone me-2"></i>Tel: 087 147 4568</h5> <!-- updated -->
                         <h5><i class="fa-brands fa-whatsapp me-2 text-success"></i>WhatsApp: 065 593 8665</h5>
                         <p>Email: info@shumaneholdings.co.za</p>
-                        <div class="social-icons">
+                        <div class="company-badge">
+                            <p class="mb-1"><strong>Reg:</strong> 2020/620149/07</p>
+                            <p class="mb-0"><strong>PSIRA:</strong> 3171761 / T4334402</p>
+                        </div>
+                        <div class="social-icons mt-3">
                             <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                             <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                             <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -468,27 +473,46 @@
                         <hr>
                         <h5>Live map</h5>
                         <div class="map-container">
-                            <!-- Google Maps embed for exact address: Old Mutual Building, Mabopane -->
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3589.789567114253!2d28.107315!3d-25.507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebfc5a1b2c1c2f3%3A0x8e8e8e8e8e8e8e8e!2sOld%20Mutual%20Building%2C%20Mabopane!5e0!3m2!1sen!2sza!4v1700000000000" allowfullscreen loading="lazy"></iframe>
                         </div>
-                        <p class="small text-muted mt-2">*Approximate location of Old Mutual Building, Mabopane</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer with SDD TECH credit and new logo -->
+    <!-- Footer with updated phone and registration numbers -->
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
-                    <img src="https://i.ibb.co/Mk9PJgq0/download-3.jpg" class="mb-3" alt="footer logo" style="height: 50px;" onerror="this.src='https://placehold.co/150x50/1a1a2e/white?text=SHUMANE'">
-                    <p>Level 1 BBBEE · Security, Medical Waste, Pest Control & Office Supply.</p>
+                    <img src="https://i.ibb.co/Mk9PJgq0/download-3.jpg" style="height: 50px; background: white; padding: 5px; border-radius: 8px;" alt="footer logo">
+                    <p class="mt-3">Level 1 BBBEE · Security, Medical Waste, Pest Control & Office Supply.</p>
+                    <p><strong>Reg:</strong> 2020/620149/07 | <strong>PSIRA:</strong> 3171761/T4334402</p>
                 </div>
-                <div class="col-lg-2 col-md-4"><h6 class="text-white">Quick links</h6><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li><li><a href="#appointment">Appointment</a></li></ul></div>
-                <div class="col-lg-2 col-md-4"><h6 class="text-white">Services</h6><ul class="list-unstyled"><li><a href="#">Security</a></li><li><a href="#">Medical waste</a></li><li><a href="#">Pest control</a></li><li><a href="#">Office supply</a></li></ul></div>
-                <div class="col-lg-3 col-md-4"><h6 class="text-white">Legal</h6><ul class="list-unstyled"><li>Reg: 2014/123456/07</li><li>PSIRA 1234567</li><li>COIDA</li></ul></div>
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="text-white">Quick links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li>
+                        <li><a href="#appointment">Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="text-white">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Security</a></li><li><a href="#">Medical waste</a></li>
+                        <li><a href="#">Pest control</a></li><li><a href="#">Office supply</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h6 class="text-white">Contact</h6>
+                    <ul class="list-unstyled">
+                        <li>087 147 4568</li>
+                        <li>065 593 8665 (WhatsApp)</li>
+                        <li>info@shumaneholdings.co.za</li>
+                    </ul>
+                </div>
             </div>
             <hr class="opacity-25">
             <div class="row">
@@ -502,7 +526,7 @@
     <a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
     <a href="#" class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
 
-    <!-- Scripts -->
+    <!-- Scripts (only AOS and back-to-top, no EmailJS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -511,112 +535,6 @@
             document.getElementById('backToTop').classList.toggle('active', window.scrollY > 350);
         });
         document.getElementById('backToTop').addEventListener('click', (e)=>{ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
-
-        (function(){ emailjs.init("OD6_2mGTpG9egRGl2"); })();
-
-        // PSIRA verification mock
-        document.getElementById('verifyBtn').addEventListener('click', function(){
-            let input = document.getElementById('psiraInput').value.trim();
-            let resultDiv = document.getElementById('verificationResult');
-            if(input.length >= 6 && /^\d+$/.test(input)) {
-                resultDiv.innerHTML = '<i class="fa-regular fa-circle-check text-success"></i> PSIRA ' + input + ' is ACTIVE (Grade A) — valid until 2027.';
-            } else {
-                resultDiv.innerHTML = '<i class="fa-regular fa-circle-xmark text-danger"></i> Invalid PSIRA number (demo: use 7 digits)';
-            }
-        });
-
-        // Appointment form submission
-        document.getElementById('appointmentForm').addEventListener('submit', function(e){
-            e.preventDefault();
-            const btn = document.getElementById('apptSubmitBtn');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = 'Sending...';
-
-            // Gather form data
-            const params = {
-                to_email: 'admin@shumaneholdings.co.za',        // admin notification
-                user_email: document.getElementById('apptEmail').value,
-                from_name: document.getElementById('apptName').value,
-                phone: document.getElementById('apptPhone').value || 'Not provided',
-                appointment_date: document.getElementById('apptDate').value,
-                appointment_time: document.getElementById('apptTime').value,
-                reason: document.getElementById('apptReason').value,
-                details: document.getElementById('apptDetails').value || 'No additional details',
-                date: new Date().toLocaleString()
-            };
-
-            // Send email to admin (using template designed for admin notification)
-            emailjs.send('service_qd6iq79', 'template_appointment_admin', params)
-                .then(function(response) {
-                    // Now send confirmation email to user
-                    return emailjs.send('service_qd6iq79', 'template_appointment_user', {
-                        to_email: params.user_email,
-                        from_name: params.from_name,
-                        appointment_date: params.appointment_date,
-                        appointment_time: params.appointment_time,
-                        reason: params.reason
-                    });
-                })
-                .then(function(response) {
-                    document.getElementById('apptAlert').innerHTML = '<span class="text-success">✓ Appointment booked! A confirmation has been sent to your email.</span>';
-                    document.getElementById('appointmentForm').reset();
-                })
-                .catch(function(error) {
-                    console.error(error);
-                    document.getElementById('apptAlert').innerHTML = '<span class="text-danger">✗ Something went wrong. Please try again or WhatsApp us.</span>';
-                })
-                .finally(function() {
-                    btn.disabled = false;
-                    btn.innerHTML = originalText;
-                });
-        });
-
-        // Existing application form
-        document.getElementById('applicationForm').addEventListener('submit', function(e){
-            e.preventDefault();
-            const btn = document.getElementById('appSubmit');
-            btn.disabled = true; btn.innerHTML = 'Sending...';
-            const params = {
-                to_email: 'admin@shumaneholdings.co.za',
-                from_name: document.getElementById('appName').value,
-                from_email: document.getElementById('appEmail').value,
-                phone: document.getElementById('appPhone').value,
-                course: document.getElementById('appCourse').value,
-                message: 'Course application',
-                date: new Date().toLocaleString()
-            };
-            emailjs.send('service_qd6iq79', 'template_sx1quj5', params).then(()=>{
-                document.getElementById('appAlert').innerHTML = '<span class="text-success">✓ Application sent, we’ll contact you.</span>';
-                this.reset();
-            }).catch(()=>{
-                document.getElementById('appAlert').innerHTML = '<span class="text-danger">✗ Error, try again or WhatsApp.</span>';
-            }).finally(()=>{ btn.disabled = false; btn.innerHTML = 'Submit application'; });
-        });
-
-        // Existing contact form
-        document.getElementById('contactForm').addEventListener('submit', function(e){
-            e.preventDefault();
-            const btn = document.getElementById('contactSubmit');
-            btn.disabled = true; btn.innerHTML = 'Sending...';
-            const params = {
-                to_email: 'admin@shumaneholdings.co.za',
-                from_name: document.getElementById('contactName').value,
-                from_email: document.getElementById('contactEmail').value,
-                message: document.getElementById('contactMessage').value,
-                date: new Date().toLocaleString()
-            };
-            emailjs.send('service_qd6iq79', 'template_7vmd7yr', params).then(()=>{
-                document.getElementById('contactAlert').innerHTML = '<span class="text-success">✓ Message sent.</span>';
-                this.reset();
-            }).catch(()=>{
-                document.getElementById('contactAlert').innerHTML = '<span class="text-danger">✗ Failed. Please WhatsApp us.</span>';
-            }).finally(()=>{ btn.disabled = false; btn.innerHTML = 'Send message'; });
-        });
     </script>
-    <!-- Note: You need to create two EmailJS templates: 
-         - "template_appointment_admin" with parameter to_email (admin)
-         - "template_appointment_user" with parameter to_email (user) 
-         and replace the template IDs in the code above. -->
 </body>
 </html>
