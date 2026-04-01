@@ -91,7 +91,7 @@
 </head>
 <body>
 
-<!-- Fixed Navbar (same for both modes) -->
+<!-- Fixed Navbar (common for both modes) -->
 <nav class="navbar">
     <div class="container">
         <a href="#" class="logo" id="logoLink">
@@ -120,9 +120,8 @@
 <!-- WhatsApp Float (common) -->
 <a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank">💬</a>
 
-<!-- ========== TEMPLATES ========== -->
-<!-- Data‑Free Version Template -->
-<template id="template-datafree">
+<!-- Data-Free Version HTML (embedded) -->
+<template id="datafree-template">
     <div class="hero-simple" id="home">
         <div class="container">
             <h1>PSIRA Security Training & Business Solutions</h1>
@@ -321,120 +320,78 @@
     </footer>
 </template>
 
-<!-- Full‑Connected Version Template -->
-<template id="template-connected">
-    <!-- This will be filled with the complete premium template -->
-    <div id="full-version-placeholder">Loading full version...</div>
-</template>
-
 <script>
-    // Dynamically load the full connected HTML (which is stored as a separate file for clarity)
-    // In production, you can embed it directly here using fetch, but we'll simulate it.
-    // For simplicity and to avoid escaping issues, we will use fetch to load the full template from an external file.
-    // However, since we are in a single-file context, we will use the same technique as before but with proper escaping.
-
-    // Since we can't easily embed the huge HTML string without escaping, we'll fetch it from a separate file if needed.
-    // For demonstration, I'll embed a minimal version here, but you can replace it with the actual full HTML.
-
-    // For the sake of this response, I'll include a placeholder that you can replace with your full HTML.
-    // In a real deployment, you would either:
-    // 1. Keep the full HTML in a separate file and fetch it via fetch().
-    // 2. Use the <template> approach but manually write the full HTML inside the template.
-
-    // I will embed the full template directly using proper HTML comments to avoid JavaScript escaping.
-    // Since we already have a huge string earlier, I'll use a different approach: put the full HTML inside a hidden div
-    // and clone it. That way we don't have to escape anything.
-
-    // Let's add a hidden div with the full HTML (premium version) at the bottom of the page.
-    // This keeps everything clean and avoids JavaScript string issues.
-</script>
-
-<!-- Hidden container with the full HTML (premium version) -->
-<div id="fullVersionSource" style="display: none;">
-    <!--
-        Paste the ENTIRE premium HTML code here (exactly as you provided, with all CSS, JS, etc.)
-        Because this is a comment block, it will not be interpreted by the browser.
-        We will later extract it and insert into the DOM.
-    -->
-</div>
-
-<script>
-    // Retrieve the full HTML from the hidden div (the content is inside a comment, so we need to extract it)
-    function getFullHTML() {
-        // For security and simplicity, we'll load it from an external file in production.
-        // Here we simulate by using a variable with the exact string you provided earlier.
-        // To avoid escaping, we can use a fetch request to a local file. For now, I'll use the same string but properly escaped.
-        // Since you already have the full HTML string, you can store it in a separate .html file and fetch it.
-        // For demonstration, I'll use a fetch to a relative path. If that file doesn't exist, it will show a fallback.
-        return fetch('full-version.html').then(res => res.text()).catch(() => {
-            console.warn('Full version file not found, using minimal version');
-            return '<div class="hero-simple"><h1>Full Version Unavailable</h1><p>Please ensure full-version.html is present.</p></div>';
-        });
-    }
-
-    // Simplified: we'll embed the full HTML directly using a string but properly escaped.
-    // To avoid the previous issues, we'll store it as a regular string with escaped backticks.
-    // Since that is complex, I'll instead use the <template> method and embed the full HTML inside a <template> tag.
-</script>
-
-<!-- Now we put the full HTML inside its own <template> tag, which is perfectly safe -->
-<template id="template-connected-real">
-    <!-- Paste the entire premium HTML code here, exactly as you have it, without any changes. -->
-    <!-- Because it's inside a <template>, it won't be rendered until cloned. -->
-    <!-- This is the cleanest solution. -->
-    <div>Replace this with your full connected HTML code.</div>
-</template>
-
-<script>
-    // Now we need to copy the content from the source div to the template.
-    // But since the source is in a comment, we can't. So the best is to put the full HTML directly inside the <template>.
-    // I'll do that now by copying the full HTML from your original code into the template.
-    // Since that is too large to repeat here, I'll include a note.
-
-    // In the final version, you must copy the entire premium HTML (from your original code) into the <template id="template-connected-real"> tag.
-    // Then the script below will clone it and insert it.
-
-    // For now, I'll use a placeholder and show the mechanism.
-
+    // Global variable for current mode
     let currentMode = 'auto';
     let isOnline = navigator.onLine;
+    let fullVersionLoaded = false;
 
-    function loadVersion(mode) {
+    // Function to load the full version from external file
+    async function loadFullVersion() {
+        try {
+            const response = await fetch('full-version.html');
+            if (!response.ok) throw new Error('Failed to load full version');
+            const html = await response.text();
+            const appDiv = document.getElementById('app');
+            appDiv.innerHTML = html;
+            fullVersionLoaded = true;
+            // Re-initialize any scripts that need to run after content is inserted
+            setTimeout(() => {
+                if (typeof AOS !== 'undefined') AOS.refresh();
+                if (typeof Swiper !== 'undefined') {
+                    new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
+                }
+            }, 100);
+        } catch (error) {
+            console.error('Error loading full version:', error);
+            // Fallback to data-free version
+            loadDataFreeVersion();
+        }
+    }
+
+    // Function to load data-free version from template
+    function loadDataFreeVersion() {
+        const template = document.getElementById('datafree-template');
+        const clone = template.content.cloneNode(true);
         const appDiv = document.getElementById('app');
-        const banner = document.getElementById('connectionBanner');
-        const templateConnected = document.getElementById('template-connected-real');
-        const templateDataFree = document.getElementById('template-datafree');
+        appDiv.innerHTML = '';
+        appDiv.appendChild(clone);
+        fullVersionLoaded = false;
+    }
 
+    // Load version based on connection and mode
+    async function loadVersion(mode) {
+        const banner = document.getElementById('connectionBanner');
         if (mode === 'data-free' || (mode === 'auto' && !isOnline)) {
-            const clone = templateDataFree.content.cloneNode(true);
-            appDiv.innerHTML = '';
-            appDiv.appendChild(clone);
+            loadDataFreeVersion();
             banner.innerHTML = '📱 DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
             banner.style.display = 'block';
             banner.style.background = '#2C9B77';
             banner.onclick = () => switchToConnected();
             currentMode = 'data-free';
         } else {
-            const clone = templateConnected.content.cloneNode(true);
-            appDiv.innerHTML = '';
-            appDiv.appendChild(clone);
+            // Show loading indicator
+            document.getElementById('app').innerHTML = '<div class="text-center py-5">Loading full version...</div>';
+            await loadFullVersion();
             banner.innerHTML = '🌐 FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
             banner.style.display = 'block';
             banner.style.background = '#E67E22';
             banner.onclick = () => switchToDataFree();
             currentMode = 'connected';
         }
-
-        // Re-attach smooth scroll after content is inserted
-        setTimeout(() => attachSmoothScroll(), 100);
-        // Re-initialize any dynamic components (like Swiper, AOS) if needed
-        if (mode !== 'data-free') {
-            initFullVersionFeatures();
-        }
+        attachSmoothScroll();
+        setupNavToggle();
     }
 
-    function switchToDataFree() { isOnline = false; loadVersion('data-free'); }
-    function switchToConnected() { isOnline = true; loadVersion('connected'); }
+    function switchToDataFree() {
+        isOnline = false;
+        loadVersion('data-free');
+    }
+
+    function switchToConnected() {
+        isOnline = true;
+        loadVersion('connected');
+    }
 
     function attachSmoothScroll() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -457,22 +414,20 @@
         if (toggleBtn && navLinks) toggleBtn.onclick = () => navLinks.classList.toggle('show');
     }
 
-    function initFullVersionFeatures() {
-        // If the full version includes Swiper, AOS, etc., initialize them here.
-        // For example:
-        if (typeof AOS !== 'undefined') AOS.refresh();
-        if (typeof Swiper !== 'undefined') {
-            new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
-        }
-    }
+    // Listen for online/offline events
+    window.addEventListener('online', () => {
+        isOnline = true;
+        if (currentMode !== 'connected') loadVersion('connected');
+    });
+    window.addEventListener('offline', () => {
+        isOnline = false;
+        loadVersion('data-free');
+    });
 
-    window.addEventListener('online', () => { isOnline = true; if (currentMode !== 'connected') loadVersion('connected'); });
-    window.addEventListener('offline', () => { isOnline = false; loadVersion('data-free'); });
-
+    // Initial load
     loadVersion('auto');
-    setupNavToggle();
 
-    // Simple form functions for data-free mode (they will be available after clone)
+    // Functions for data-free forms (must be global)
     window.submitAppointmentDF = function() {
         let name = document.getElementById('appNameDF')?.value;
         if (!name) return alert('Please fill required fields');
@@ -489,8 +444,5 @@
             '%0ACourse: ' + encodeURIComponent(document.getElementById('courseSelectDF').value);
     };
 </script>
-
-<!-- IMPORTANT: You must paste your full premium HTML code into the <template id="template-connected-real"> tag above.
-     Replace the placeholder content with the entire HTML from your original "connected" version. -->
 </body>
 </html>
