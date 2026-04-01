@@ -120,7 +120,7 @@
 <!-- WhatsApp Float (common) -->
 <a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank">💬</a>
 
-<!-- Data-Free Version HTML (embedded) -->
+<!-- Data-Free Version HTML (embedded, no emojis) -->
 <template id="datafree-template">
     <div class="hero-simple" id="home">
         <div class="container">
@@ -134,11 +134,11 @@
     </div>
     <div class="bg-light py-3">
         <div class="container d-flex flex-wrap gap-3 justify-center">
-            <span class="geo-badge">📍 Mabopane</span>
-            <span class="geo-badge">📍 Winterveld</span>
-            <span class="geo-badge">📍 Soshanguve</span>
-            <span class="geo-badge">📍 Ga-Rankuwa</span>
-            <span class="geo-badge">📍 Pretoria</span>
+            <span class="geo-badge">Mabopane</span>
+            <span class="geo-badge">Winterveld</span>
+            <span class="geo-badge">Soshanguve</span>
+            <span class="geo-badge">Ga-Rankuwa</span>
+            <span class="geo-badge">Pretoria</span>
         </div>
     </div>
     <section id="about" class="py-5">
@@ -150,8 +150,8 @@
                     <p>Shumane Holdings offers PSIRA‑accredited security training, medical waste removal, pest control, office stationery, and professional printing across Gauteng.</p>
                     <p><strong>Head Office:</strong> Mabopane Station, Court Office No. 459, 1st Floor, Block M, Old Mutual Centre</p>
                     <div class="d-flex gap-3 mt-3 flex-wrap">
-                        <span>📄 Reg: 2020/620149/07</span>
-                        <span>🛡️ PSIRA: 3171761 / T4334402</span>
+                        <span>Reg: 2020/620149/07</span>
+                        <span>PSIRA: 3171761 / T4334402</span>
                     </div>
                 </div>
                 <div class="col-2">
@@ -234,8 +234,8 @@
     <section class="py-4">
         <div class="container">
             <div class="row">
-                <div class="col-2"><div class="card"><h3>🖨️ Printing Price List</h3><ul class="list-unstyled" style="margin-top: 1rem;"><li>Photocopy (B&W): R2/page</li><li>Photocopy (Colour): R6/page</li><li>Printout (B&W): R2/page</li><li>Printout (Colour): R6/page</li><li>Scanning: R3/page</li><li>Typing: R20/page</li><li>Lamination: R10/A4</li></ul></div></div>
-                <div class="col-2"><div class="card"><h3>🏷️ Current Specials</h3><p><strong>Grade E, D & C combo:</strong> R2200 (save R300)<br><strong>Full Grades (E-A):</strong> R4500<br><strong>Firearm combo (any 2):</strong> R4500</p><div class="badge mt-2">Limited seats available</div></div></div>
+                <div class="col-2"><div class="card"><h3>Printing Price List</h3><ul class="list-unstyled" style="margin-top: 1rem;"><li>Photocopy (B&W): R2/page</li><li>Photocopy (Colour): R6/page</li><li>Printout (B&W): R2/page</li><li>Printout (Colour): R6/page</li><li>Scanning: R3/page</li><li>Typing: R20/page</li><li>Lamination: R10/A4</li></ul></div></div>
+                <div class="col-2"><div class="card"><h3>Current Specials</h3><p><strong>Grade E, D & C combo:</strong> R2200 (save R300)<br><strong>Full Grades (E-A):</strong> R4500<br><strong>Firearm combo (any 2):</strong> R4500</p><div class="badge mt-2">Limited seats available</div></div></div>
             </div>
         </div>
     </section>
@@ -288,7 +288,7 @@
             <div class="row">
                 <div class="col-2">
                     <h2 class="section-title">Get in Touch</h2>
-                    <p><strong>📍 Mabopane Station, Court Office No. 459, 1st Floor, Block M</strong></p>
+                    <p><strong>Mabopane Station, Court Office No. 459, 1st Floor, Block M</strong></p>
                     <p>📞 087 147 4568</p>
                     <p>💬 065 593 8665 (WhatsApp)</p>
                     <p>✉️ info@shumaneholdings.com</p>
@@ -296,7 +296,7 @@
                 </div>
                 <div class="col-2">
                     <div class="card">
-                        <h3>🏦 Banking Details</h3>
+                        <h3>Banking Details</h3>
                         <p><strong>Bank:</strong> Capitec Bank</p>
                         <p><strong>Account Holder:</strong> Shumane Holdings</p>
                         <p><strong>Account Number:</strong> 1053383355</p>
@@ -326,21 +326,66 @@
     let isOnline = navigator.onLine;
     let fullVersionLoaded = false;
 
-    // Function to load the full version from external file
+    // Function to load the full version from external file and execute its scripts
     async function loadFullVersion() {
         try {
             const response = await fetch('full-version.html');
             if (!response.ok) throw new Error('Failed to load full version');
             const html = await response.text();
+
+            // Create a temporary container to parse the HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+
+            // Extract all stylesheets (link tags) and add them to document head
+            const links = tempDiv.querySelectorAll('link[rel="stylesheet"]');
+            links.forEach(link => {
+                if (!document.querySelector(`link[href="${link.href}"]`)) {
+                    document.head.appendChild(link.cloneNode(true));
+                }
+            });
+
+            // Extract all scripts
+            const scripts = tempDiv.querySelectorAll('script');
+            const scriptContents = [];
+            scripts.forEach(script => {
+                if (script.src) {
+                    // External script: create new script tag and load it
+                    const newScript = document.createElement('script');
+                    newScript.src = script.src;
+                    newScript.async = false;
+                    document.body.appendChild(newScript);
+                } else {
+                    // Inline script: store content for later execution
+                    scriptContents.push(script.textContent);
+                }
+            });
+
+            // Insert the body content (everything except link/script we already handled)
+            // Remove all link and script elements from tempDiv before inserting to avoid duplication
+            tempDiv.querySelectorAll('link[rel="stylesheet"], script').forEach(el => el.remove());
             const appDiv = document.getElementById('app');
-            appDiv.innerHTML = html;
+            appDiv.innerHTML = tempDiv.innerHTML;
+
+            // Execute inline scripts after DOM is updated
+            scriptContents.forEach(content => {
+                const newScript = document.createElement('script');
+                newScript.textContent = content;
+                document.body.appendChild(newScript);
+            });
+
             fullVersionLoaded = true;
+
             // Re-initialize any scripts that need to run after content is inserted
             setTimeout(() => {
+                // If AOS is available, refresh it
                 if (typeof AOS !== 'undefined') AOS.refresh();
-                if (typeof Swiper !== 'undefined') {
+                // Swiper is often initialized in the loaded HTML, but we can also ensure it runs
+                if (typeof Swiper !== 'undefined' && document.querySelector('.hero-swiper')) {
                     new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
                 }
+                // Re-attach smooth scroll for any new links
+                attachSmoothScroll();
             }, 100);
         } catch (error) {
             console.error('Error loading full version:', error);
@@ -357,6 +402,7 @@
         appDiv.innerHTML = '';
         appDiv.appendChild(clone);
         fullVersionLoaded = false;
+        attachSmoothScroll();
     }
 
     // Load version based on connection and mode
@@ -364,7 +410,7 @@
         const banner = document.getElementById('connectionBanner');
         if (mode === 'data-free' || (mode === 'auto' && !isOnline)) {
             loadDataFreeVersion();
-            banner.innerHTML = '📱 DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
+            banner.innerHTML = 'DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
             banner.style.display = 'block';
             banner.style.background = '#2C9B77';
             banner.onclick = () => switchToConnected();
@@ -373,13 +419,12 @@
             // Show loading indicator
             document.getElementById('app').innerHTML = '<div class="text-center py-5">Loading full version...</div>';
             await loadFullVersion();
-            banner.innerHTML = '🌐 FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
+            banner.innerHTML = 'FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
             banner.style.display = 'block';
             banner.style.background = '#E67E22';
             banner.onclick = () => switchToDataFree();
             currentMode = 'connected';
         }
-        attachSmoothScroll();
         setupNavToggle();
     }
 
