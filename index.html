@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Shumane Holdings | Dual‑Mode Website</title>
-    <meta name="description" content="Shumane Holdings: PSIRA‑accredited security training in Mabopane, Winterveld, Soshanguve & Pretoria. Medical waste, pest control, office stationery & printing.">
+    <title>Shumane Holdings | PSIRA Security Training</title>
+    <meta name="description" content="Shumane Holdings: PSIRA-accredited security training in Mabopane, Winterveld, Soshanguve & Pretoria. Medical waste, pest control, office stationery & printing.">
     <meta name="keywords" content="Shumane Holdings, PSIRA training, security courses, medical waste, pest control">
     <meta name="author" content="Shumane Holdings">
     <meta name="robots" content="index, follow">
@@ -12,116 +12,149 @@
     <link rel="canonical" href="https://shumaneholdings.com">
     <link rel="icon" type="image/jpeg" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E67E22'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3ESH%3C/text%3E%3C/svg%3E">
     <style>
-        /* Base styles for both modes */
-        * { margin:0; padding:0; box-sizing: border-box; }
-        :root {
-            --primary: #0F2B3D;
-            --secondary: #E67E22;
-            --secondary-light: #F39C12;
-            --light-bg: #F8F9FC;
-            --white: #ffffff;
+        /* Global banner styles (will be used in both modes) */
+        .mode-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #E67E22;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 10000;
+            cursor: pointer;
+            transition: background 0.2s;
         }
+        .mode-banner[data-mode="datafree"] {
+            background: #2C9B77;
+        }
+        /* Data-free version specific styles (no external dependencies) */
+        .datafree-nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 40px; /* below banner */
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 10px 0;
+        }
+        .datafree-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .datafree-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .datafree-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0F2B3D, #E67E22);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .datafree-logo-text {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0F2B3D;
+        }
+        .datafree-nav-links {
+            display: flex;
+            gap: 5px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .datafree-nav-links a {
+            text-decoration: none;
+            color: #0F2B3D;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: 0.2s;
+        }
+        .datafree-nav-links a:hover {
+            background: #E67E22;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .datafree-nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                padding-top: 1rem;
+            }
+            .datafree-nav-links.show {
+                display: flex;
+            }
+            .datafree-nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+        .datafree-nav-toggle {
+            display: none;
+        }
+        /* Reset body padding to account for banner */
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--white);
-            color: #1E2A32;
-            scroll-behavior: smooth;
-            line-height: 1.5;
+            padding-top: 40px;
         }
-        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative; display: inline-block; }
-        .section-title:after { content: ''; width: 60px; height: 3px; background: var(--secondary); position: absolute; bottom: -10px; left: 0; border-radius: 2px; }
-        .text-center .section-title:after { left: 50%; transform: translateX(-50%); }
-        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
-        .btn-primary { background: linear-gradient(95deg, var(--secondary), var(--secondary-light)); color: white; }
-        .btn-primary:hover { transform: translateY(-2px); }
-        .btn-outline { border: 2px solid var(--secondary); background: transparent; color: var(--secondary); }
-        .btn-outline:hover { background: var(--secondary); color: white; }
-        .row { display: flex; flex-wrap: wrap; gap: 24px; }
-        .col-3 { flex: 1; min-width: 250px; }
-        .col-2 { flex: 1; min-width: 300px; }
-        .col-4 { flex: 1; min-width: 280px; }
-        .card { background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s; height: 100%; }
-        .card:hover { transform: translateY(-5px); }
-        .badge { background: var(--secondary); color: white; padding: 5px 15px; border-radius: 30px; display: inline-block; font-size: 0.85rem; font-weight: 600; }
-        .geo-badge { background: var(--light-bg); border-radius: 30px; padding: 6px 16px; font-size: 0.85rem; display: inline-block; }
-        .form-control { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; margin-bottom: 12px; }
-        .footer { background: #0A1924; color: #CDE1E9; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
-        .footer a { color: #bbb; text-decoration: none; }
-        .footer a:hover { color: var(--secondary); }
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 99; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(37,211,102,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
-        @media (max-width: 768px) { .hero-content h1 { font-size: 1.8rem; } .section-title { font-size: 1.5rem; } .row { flex-direction: column; } }
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-3 { margin-top: 1rem; }
-        .mt-4 { margin-top: 1.5rem; }
-        .py-3 { padding-top: 1rem; padding-bottom: 1rem; }
-        .py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
-        .py-5 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
-        .bg-light { background: var(--light-bg); }
-        .d-flex { display: flex; }
-        .flex-wrap { flex-wrap: wrap; }
-        .justify-center { justify-content: center; }
-        .gap-3 { gap: 1rem; }
-        .w-100 { width: 100%; }
-        .navbar { background: rgba(255,255,255,0.98); box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed; top: 0; width: 100%; z-index: 1000; padding: 12px 0; }
-        .navbar .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
-        .logo-text { font-weight: 800; font-size: 1.3rem; color: var(--primary); }
-        .nav-links { display: flex; gap: 5px; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
-        .nav-links li { list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; padding: 8px 16px; border-radius: 40px; transition: 0.2s; display: inline-block; }
-        .nav-links a:hover, .nav-links a.active { background: var(--secondary); color: white; }
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
-        .connection-banner { background: var(--secondary); color: white; text-align: center; padding: 10px; font-size: 0.85rem; position: fixed; top: 70px; left: 0; right: 0; z-index: 999; cursor: pointer; font-weight: 500; }
-        @media (max-width: 768px) { .nav-links { display: none; width: 100%; flex-direction: column; padding: 1rem 0; } .nav-links.show { display: flex; } .nav-toggle { display: block; } body { padding-top: 70px; } .connection-banner { top: 70px; } }
-        .service-icon { font-size: 2rem; margin-bottom: 1rem; display: inline-block; }
-        .list-unstyled { list-style: none; }
-        .hero-simple { background: linear-gradient(135deg, #0F2B3D, #E67E22); color: white; padding: 100px 0 80px; text-align: center; margin-top: 70px; }
-        .hero-simple h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .price-item { padding: 10px 0; border-bottom: 1px solid #eee; }
-        .accordion-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; }
-        .accordion-header { background: var(--light-bg); padding: 15px 20px; cursor: pointer; font-weight: 600; border-radius: 8px; }
-        .accordion-content { padding: 15px 20px; display: none; border-top: 1px solid #ddd; }
-        .accordion-item.active .accordion-content { display: block; }
+        /* For data-free version, the navbar sits below banner */
+        .datafree-nav {
+            top: 40px;
+        }
+        /* For full version, we need to push content down because its navbar is also fixed */
+        .full-version-padding {
+            padding-top: 40px;
+        }
     </style>
 </head>
 <body>
 
-<!-- Fixed Navbar (common for both modes) -->
-<nav class="navbar">
-    <div class="container">
-        <a href="#" class="logo" id="logoLink">
-            <div class="logo-icon">SH</div>
-            <span class="logo-text">Shumane Holdings</span>
-        </a>
-        <button class="nav-toggle" id="navToggleBtn">☰</button>
-        <ul class="nav-links" id="navLinksList">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#training">Courses</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#apply" class="btn btn-primary" style="background: var(--secondary); color:white; padding: 8px 20px;">Enroll</a></li>
-        </ul>
-    </div>
-</nav>
+<!-- Mode banner (will be created dynamically) -->
+<div id="modeBanner" class="mode-banner" style="display: none;"></div>
 
-<!-- Connection Banner -->
-<div id="connectionBanner" class="connection-banner" style="display: none;"></div>
-
-<!-- Content Container -->
+<!-- Main content container -->
 <div id="app"></div>
 
-<!-- WhatsApp Float (common) -->
-<a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank">💬</a>
-
-<!-- Data-Free Version HTML (embedded, no emojis) -->
+<!-- Data-Free Version Template (lightweight, no external resources, no emojis) -->
 <template id="datafree-template">
+    <div class="datafree-nav">
+        <div class="datafree-container">
+            <a href="#" class="datafree-logo">
+                <div class="datafree-logo-icon">SH</div>
+                <span class="datafree-logo-text">Shumane Holdings</span>
+            </a>
+            <button class="datafree-nav-toggle">☰</button>
+            <ul class="datafree-nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#training">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#apply" style="background: #E67E22; color: white; padding: 6px 18px;">Enroll</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="hero-simple" id="home">
         <div class="container">
             <h1>PSIRA Security Training & Business Solutions</h1>
@@ -310,7 +343,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-3"><div class="logo-icon" style="background: var(--secondary);">SH</div><p class="mt-2">Level 1 BBBEE | PSIRA Accredited</p><p>Reg: 2020/620149/07</p></div>
+                <div class="col-3"><div class="datafree-logo-icon" style="background: #E67E22;">SH</div><p class="mt-2">Level 1 BBBEE | PSIRA Accredited</p><p>Reg: 2020/620149/07</p></div>
                 <div class="col-3"><h4>Quick Links</h4><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li></ul></div>
                 <div class="col-3"><h4>Contact</h4><p>087 147 4568<br>info@shumaneholdings.com</p></div>
             </div>
@@ -321,80 +354,31 @@
 </template>
 
 <script>
-    // Global variable for current mode
+    // Global variables
     let currentMode = 'auto';
     let isOnline = navigator.onLine;
     let fullVersionLoaded = false;
 
-    // Function to load the full version from external file and execute its scripts
-    async function loadFullVersion() {
-        try {
-            const response = await fetch('full-version.html');
-            if (!response.ok) throw new Error('Failed to load full version');
-            const html = await response.text();
+    const banner = document.getElementById('modeBanner');
 
-            // Create a temporary container to parse the HTML
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = html;
-
-            // Extract all stylesheets (link tags) and add them to document head
-            const links = tempDiv.querySelectorAll('link[rel="stylesheet"]');
-            links.forEach(link => {
-                if (!document.querySelector(`link[href="${link.href}"]`)) {
-                    document.head.appendChild(link.cloneNode(true));
-                }
-            });
-
-            // Extract all scripts
-            const scripts = tempDiv.querySelectorAll('script');
-            const scriptContents = [];
-            scripts.forEach(script => {
-                if (script.src) {
-                    // External script: create new script tag and load it
-                    const newScript = document.createElement('script');
-                    newScript.src = script.src;
-                    newScript.async = false;
-                    document.body.appendChild(newScript);
-                } else {
-                    // Inline script: store content for later execution
-                    scriptContents.push(script.textContent);
-                }
-            });
-
-            // Insert the body content (everything except link/script we already handled)
-            // Remove all link and script elements from tempDiv before inserting to avoid duplication
-            tempDiv.querySelectorAll('link[rel="stylesheet"], script').forEach(el => el.remove());
-            const appDiv = document.getElementById('app');
-            appDiv.innerHTML = tempDiv.innerHTML;
-
-            // Execute inline scripts after DOM is updated
-            scriptContents.forEach(content => {
-                const newScript = document.createElement('script');
-                newScript.textContent = content;
-                document.body.appendChild(newScript);
-            });
-
-            fullVersionLoaded = true;
-
-            // Re-initialize any scripts that need to run after content is inserted
-            setTimeout(() => {
-                // If AOS is available, refresh it
-                if (typeof AOS !== 'undefined') AOS.refresh();
-                // Swiper is often initialized in the loaded HTML, but we can also ensure it runs
-                if (typeof Swiper !== 'undefined' && document.querySelector('.hero-swiper')) {
-                    new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
-                }
-                // Re-attach smooth scroll for any new links
-                attachSmoothScroll();
-            }, 100);
-        } catch (error) {
-            console.error('Error loading full version:', error);
-            // Fallback to data-free version
-            loadDataFreeVersion();
+    // Show/hide banner and update text
+    function updateBanner(mode) {
+        if (mode === 'data-free') {
+            banner.textContent = 'DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
+            banner.style.display = 'block';
+            banner.setAttribute('data-mode', 'datafree');
+            banner.style.background = '#2C9B77';
+            banner.onclick = () => switchToConnected();
+        } else {
+            banner.textContent = 'FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
+            banner.style.display = 'block';
+            banner.setAttribute('data-mode', 'connected');
+            banner.style.background = '#E67E22';
+            banner.onclick = () => switchToDataFree();
         }
     }
 
-    // Function to load data-free version from template
+    // Load data-free version from template
     function loadDataFreeVersion() {
         const template = document.getElementById('datafree-template');
         const clone = template.content.cloneNode(true);
@@ -402,30 +386,69 @@
         appDiv.innerHTML = '';
         appDiv.appendChild(clone);
         fullVersionLoaded = false;
+        updateBanner('data-free');
+        attachDataFreeNavToggle();
         attachSmoothScroll();
+    }
+
+    // Load full version by fetching full-version.html and injecting it
+    async function loadFullVersion() {
+        try {
+            const response = await fetch('full-version.html');
+            if (!response.ok) throw new Error('Failed to load full version');
+            let html = await response.text();
+
+            // Inject the banner after the body tag (so it appears at the very top)
+            // We'll add a small script to adjust body padding because the full version's navbar is fixed.
+            // We'll also ensure the banner is visible by adding it right after <body>.
+            const bannerHtml = `<div id="fullVersionBanner" class="mode-banner" style="display: block; background: #E67E22;">FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.</div>`;
+            // Insert after <body> opening tag
+            html = html.replace(/<body[^>]*>/i, match => match + bannerHtml);
+
+            // Also add a script to adjust body padding and attach banner click handler
+            const scriptFix = `<script>
+                // Adjust body padding for the banner
+                document.body.style.paddingTop = '40px';
+                // Attach click handler to the banner
+                const bannerElem = document.getElementById('fullVersionBanner');
+                if (bannerElem) {
+                    bannerElem.onclick = function() { window.dispatchEvent(new CustomEvent('switchToDataFree')); };
+                }
+                // Re-initialize any scripts that depend on DOM (like Swiper, AOS) after full load
+                if (typeof AOS !== 'undefined') AOS.refresh();
+                if (typeof Swiper !== 'undefined') {
+                    new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
+                }
+            <\/script>`;
+            // Insert before closing </body> to ensure DOM is ready
+            html = html.replace(/<\/body>/i, scriptFix + '</body>');
+
+            // Replace the app container content
+            const appDiv = document.getElementById('app');
+            appDiv.innerHTML = html;
+
+            fullVersionLoaded = true;
+            updateBanner('connected'); // we already have a banner, but we need to hide our original banner? Actually we injected a separate banner, but we can still keep the original hidden. Let's hide the original one.
+            document.getElementById('modeBanner').style.display = 'none';
+
+            // We also need to listen for the custom event dispatched from the injected banner's onclick
+            window.addEventListener('switchToDataFree', () => switchToDataFree());
+        } catch (error) {
+            console.error('Error loading full version:', error);
+            // Fallback to data-free
+            loadDataFreeVersion();
+        }
     }
 
     // Load version based on connection and mode
     async function loadVersion(mode) {
-        const banner = document.getElementById('connectionBanner');
         if (mode === 'data-free' || (mode === 'auto' && !isOnline)) {
             loadDataFreeVersion();
-            banner.innerHTML = 'DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
-            banner.style.display = 'block';
-            banner.style.background = '#2C9B77';
-            banner.onclick = () => switchToConnected();
             currentMode = 'data-free';
         } else {
-            // Show loading indicator
-            document.getElementById('app').innerHTML = '<div class="text-center py-5">Loading full version...</div>';
             await loadFullVersion();
-            banner.innerHTML = 'FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
-            banner.style.display = 'block';
-            banner.style.background = '#E67E22';
-            banner.onclick = () => switchToDataFree();
             currentMode = 'connected';
         }
-        setupNavToggle();
     }
 
     function switchToDataFree() {
@@ -436,6 +459,15 @@
     function switchToConnected() {
         isOnline = true;
         loadVersion('connected');
+    }
+
+    // Helpers for data-free version
+    function attachDataFreeNavToggle() {
+        const toggleBtn = document.querySelector('.datafree-nav-toggle');
+        const navLinks = document.querySelector('.datafree-nav-links');
+        if (toggleBtn && navLinks) {
+            toggleBtn.onclick = () => navLinks.classList.toggle('show');
+        }
     }
 
     function attachSmoothScroll() {
@@ -453,12 +485,6 @@
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function setupNavToggle() {
-        const toggleBtn = document.getElementById('navToggleBtn');
-        const navLinks = document.getElementById('navLinksList');
-        if (toggleBtn && navLinks) toggleBtn.onclick = () => navLinks.classList.toggle('show');
-    }
-
     // Listen for online/offline events
     window.addEventListener('online', () => {
         isOnline = true;
@@ -469,10 +495,7 @@
         loadVersion('data-free');
     });
 
-    // Initial load
-    loadVersion('auto');
-
-    // Functions for data-free forms (must be global)
+    // Global functions for data-free forms
     window.submitAppointmentDF = function() {
         let name = document.getElementById('appNameDF')?.value;
         if (!name) return alert('Please fill required fields');
@@ -488,6 +511,9 @@
             '%0APhone: ' + encodeURIComponent(document.getElementById('coursePhoneDF').value) +
             '%0ACourse: ' + encodeURIComponent(document.getElementById('courseSelectDF').value);
     };
+
+    // Initial load
+    loadVersion('auto');
 </script>
 </body>
 </html>
