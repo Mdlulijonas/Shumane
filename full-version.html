@@ -291,6 +291,34 @@
             .hero-content h1 { font-size: 2.2rem; }
             .section-title { font-size: 2rem; }
         }
+        /* Switch button */
+        .mode-switch-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s;
+        }
+        .mode-switch-btn:hover {
+            background: var(--secondary-light);
+            transform: scale(1.02);
+        }
+        @media (max-width: 768px) {
+            .mode-switch-btn {
+                bottom: 90px;
+                right: 20px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
     <script type="application/ld+json">
     {
@@ -398,7 +426,6 @@
                 <div class="mt-4"><a href="#contact" class="btn btn-outline-gold">Contact us <i class="fas fa-phone-alt ms-2"></i></a></div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
-                <!-- Using the logo image as requested -->
                 <img src="https://i.ibb.co/Mk9PJgq0/download-3.jpg" class="img-fluid rounded-4 shadow" alt="Shumane Holdings Logo" style="max-width: 100%; background: #f5f5f5; padding: 1rem;">
             </div>
         </div>
@@ -540,12 +567,12 @@
                     <table class="table table-bordered mb-0">
                         <thead>办<th>Security Grade</th><th>Special Price (R)</th> </thead>
                         <tbody>
-                              <tr><td>Grade E, D</td><td class="fw-bold">R1300.00</td></tr>
-                              <tr><td>Grade C</td><td class="fw-bold">R1000.00</td></tr>
-                              <tr><td>Grade E, D & C (Combo)</td><td class="fw-bold text-success">R2200.00</td></tr>
-                              <tr><td>Grade B</td><td class="fw-bold">R1300.00</td></tr>
-                              <tr><td>Grade A</td><td class="fw-bold">R1500.00</td></tr>
-                             <tr class="table-warning"><td>Full Grades (E, D, C, B, A)</td><td class="fw-bold">R4500.00</td></tr>
+                               <tr><td>Grade E, D</td><td class="fw-bold">R1300.00</td></tr>
+                               <tr><td>Grade C</td><td class="fw-bold">R1000.00</td></tr>
+                               <tr><td>Grade E, D & C (Combo)</td><td class="fw-bold text-success">R2200.00</td></tr>
+                               <tr><td>Grade B</td><td class="fw-bold">R1300.00</td></tr>
+                               <tr><td>Grade A</td><td class="fw-bold">R1500.00</td></tr>
+                               <tr class="table-warning"><td>Full Grades (E, D, C, B, A)</td><td class="fw-bold">R4500.00</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -553,9 +580,9 @@
                     <table class="table table-bordered">
                         <thead><tr><th>Firearm Training</th><th>Price</th></tr></thead>
                         <tbody>
-                              <tr><td>Hand Gun / Shot Gun / Rifle</td><td>R2500 each</td></tr>
-                              <tr><td>Combo (any 2 firearms)</td><td>R4500.00</td></tr>
-                              <tr><td>Combo (all 3 firearms)</td><td>R5500.00</td></tr>
+                               <tr><td>Hand Gun / Shot Gun / Rifle</td><td>R2500 each</td></tr>
+                               <tr><td>Combo (any 2 firearms)</td><td>R4500.00</td></tr>
+                               <tr><td>Combo (all 3 firearms)</td><td>R5500.00</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -729,7 +756,9 @@
 <a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 <a href="#" class="back-to-top" id="backToTopBtn"><i class="fas fa-arrow-up"></i></a>
 
-<!-- Scripts -->
+<!-- Switch button -->
+<button id="switchToDataFree" class="mode-switch-btn">Switch to Data-Free Mode</button>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -738,11 +767,9 @@
 <script>
     AOS.init({ duration: 700, once: true, offset: 100 });
     
-    // Store Typed instances for hero slides
     let heroTypedInstances = [];
     let serviceTypedInstances = [];
     
-    // Initialize hero typing for a specific slide
     function initHeroTyping(slideIndex) {
         const slide = document.querySelectorAll('.hero-swiper .swiper-slide')[slideIndex];
         if (!slide) return;
@@ -750,7 +777,6 @@
         if (!typedSpan) return;
         const text = typedSpan.getAttribute('data-text');
         if (!text) return;
-        // If already typed, skip
         if (heroTypedInstances[slideIndex]) return;
         heroTypedInstances[slideIndex] = new Typed(typedSpan, {
             strings: [text],
@@ -761,7 +787,6 @@
         });
     }
     
-    // Initialize all service typing (once)
     function initServiceTyping() {
         const serviceSpans = document.querySelectorAll('.service-typed');
         serviceSpans.forEach((span, idx) => {
@@ -778,7 +803,6 @@
         });
     }
     
-    // Swiper with Fade effect and dynamic typing on slide change
     const swiper = new Swiper('.hero-swiper', {
         effect: 'fade',
         fadeEffect: { crossFade: true },
@@ -788,19 +812,15 @@
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         on: {
             init: function() {
-                // Initialize typing for the first visible slide (index 0)
                 initHeroTyping(0);
                 initServiceTyping();
             },
             slideChangeTransitionEnd: function() {
-                // Get the active slide index (real index, considering loop)
                 const realIndex = this.realIndex;
                 initHeroTyping(realIndex);
             }
         }
     });
-    
-    // Also handle manual slide changes via pagination clicks (already covered by slideChangeTransitionEnd)
     
     window.addEventListener('scroll', () => {
         document.getElementById('backToTopBtn').classList.toggle('active', window.scrollY > 400);
@@ -820,6 +840,11 @@
         if(!name) return alert('Please enter your name');
         window.location.href = `mailto:info@shumaneholdings.com?subject=Course Application: ${document.getElementById('courseSelect').value}&body=Name: ${name}%0AEmail: ${document.getElementById('courseEmail').value}%0APhone: ${document.getElementById('coursePhone').value}%0ACourse: ${document.getElementById('courseSelect').value}`;
     }
+    
+    // Switch to data-free version
+    document.getElementById('switchToDataFree').addEventListener('click', function() {
+        window.location.href = 'data-free.html';
+    });
 </script>
 </body>
 </html>
