@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Shumane Holdings | PSIRA Security Training</title>
+    <title>Shumane Holdings | Data‑Free Version</title>
     <meta name="description" content="Shumane Holdings: PSIRA-accredited security training in Mabopane, Winterveld, Soshanguve & Pretoria. Medical waste, pest control, office stationery & printing.">
     <meta name="keywords" content="Shumane Holdings, PSIRA training, security courses, medical waste, pest control">
     <meta name="author" content="Shumane Holdings">
@@ -12,490 +12,356 @@
     <link rel="canonical" href="https://shumaneholdings.com">
     <link rel="icon" type="image/jpeg" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E67E22'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='white' font-weight='bold'%3ESH%3C/text%3E%3C/svg%3E">
     <style>
-        /* Global banner styles (will be used in both modes) */
-        .mode-banner {
+        * { margin:0; padding:0; box-sizing: border-box; }
+        :root {
+            --primary: #0F2B3D;
+            --secondary: #E67E22;
+            --secondary-light: #F39C12;
+            --light-bg: #F8F9FC;
+            --white: #ffffff;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--white);
+            color: #1E2A32;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-title { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; position: relative; display: inline-block; }
+        .section-title:after { content: ''; width: 60px; height: 3px; background: var(--secondary); position: absolute; bottom: -10px; left: 0; border-radius: 2px; }
+        .text-center .section-title:after { left: 50%; transform: translateX(-50%); }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; font-size: 0.95rem; }
+        .btn-primary { background: linear-gradient(95deg, var(--secondary), var(--secondary-light)); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); }
+        .btn-outline { border: 2px solid var(--secondary); background: transparent; color: var(--secondary); }
+        .btn-outline:hover { background: var(--secondary); color: white; }
+        .row { display: flex; flex-wrap: wrap; gap: 24px; }
+        .col-3 { flex: 1; min-width: 250px; }
+        .col-2 { flex: 1; min-width: 300px; }
+        .col-4 { flex: 1; min-width: 280px; }
+        .card { background: white; border-radius: 20px; padding: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: transform 0.3s; height: 100%; }
+        .card:hover { transform: translateY(-5px); }
+        .badge { background: var(--secondary); color: white; padding: 5px 15px; border-radius: 30px; display: inline-block; font-size: 0.85rem; font-weight: 600; }
+        .geo-badge { background: var(--light-bg); border-radius: 30px; padding: 6px 16px; font-size: 0.85rem; display: inline-block; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 12px; font-size: 1rem; margin-bottom: 12px; }
+        .footer { background: #0A1924; color: #CDE1E9; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
+        .footer a { color: #bbb; text-decoration: none; }
+        .footer a:hover { color: var(--secondary); }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 99; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(37,211,102,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+        @media (max-width: 768px) { .hero-content h1 { font-size: 1.8rem; } .section-title { font-size: 1.5rem; } .row { flex-direction: column; } }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-3 { margin-top: 1rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .py-3 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .py-5 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+        .bg-light { background: var(--light-bg); }
+        .d-flex { display: flex; }
+        .flex-wrap { flex-wrap: wrap; }
+        .justify-center { justify-content: center; }
+        .gap-3 { gap: 1rem; }
+        .w-100 { width: 100%; }
+        .navbar { background: rgba(255,255,255,0.98); box-shadow: 0 2px 15px rgba(0,0,0,0.05); position: fixed; top: 0; width: 100%; z-index: 1000; padding: 12px 0; }
+        .navbar .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; }
+        .logo-text { font-weight: 800; font-size: 1.3rem; color: var(--primary); }
+        .nav-links { display: flex; gap: 5px; list-style: none; flex-wrap: wrap; margin: 0; padding: 0; }
+        .nav-links li { list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 600; padding: 8px 16px; border-radius: 40px; transition: 0.2s; display: inline-block; }
+        .nav-links a:hover, .nav-links a.active { background: var(--secondary); color: white; }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary); }
+        @media (max-width: 768px) { .nav-links { display: none; width: 100%; flex-direction: column; padding: 1rem 0; } .nav-links.show { display: flex; } .nav-toggle { display: block; } body { padding-top: 70px; } }
+        .service-icon { font-size: 2rem; margin-bottom: 1rem; display: inline-block; }
+        .list-unstyled { list-style: none; }
+        .hero-simple { background: linear-gradient(135deg, #0F2B3D, #E67E22); color: white; padding: 100px 0 80px; text-align: center; margin-top: 70px; }
+        .hero-simple h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .price-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .mode-switch-btn {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #E67E22;
+            bottom: 100px;
+            right: 30px;
+            background: var(--secondary);
             color: white;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            z-index: 10000;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .mode-banner[data-mode="datafree"] {
-            background: #2C9B77;
-        }
-        /* Data-free version specific styles (no external dependencies) */
-        .datafree-nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: fixed;
-            top: 40px; /* below banner */
-            left: 0;
-            width: 100%;
-            z-index: 999;
-            padding: 10px 0;
-        }
-        .datafree-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .datafree-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .datafree-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #0F2B3D, #E67E22);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
             font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.2s;
         }
-        .datafree-logo-text {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #0F2B3D;
-        }
-        .datafree-nav-links {
-            display: flex;
-            gap: 5px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .datafree-nav-links a {
-            text-decoration: none;
-            color: #0F2B3D;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 30px;
-            transition: 0.2s;
-        }
-        .datafree-nav-links a:hover {
-            background: #E67E22;
-            color: white;
+        .mode-switch-btn:hover {
+            background: var(--secondary-light);
+            transform: scale(1.02);
         }
         @media (max-width: 768px) {
-            .datafree-nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                padding-top: 1rem;
+            .mode-switch-btn {
+                bottom: 90px;
+                right: 20px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
-            .datafree-nav-links.show {
-                display: flex;
-            }
-            .datafree-nav-toggle {
-                display: block;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-        }
-        .datafree-nav-toggle {
-            display: none;
-        }
-        /* Reset body padding to account for banner */
-        body {
-            padding-top: 40px;
-        }
-        /* For data-free version, the navbar sits below banner */
-        .datafree-nav {
-            top: 40px;
-        }
-        /* For full version, we need to push content down because its navbar is also fixed */
-        .full-version-padding {
-            padding-top: 40px;
         }
     </style>
 </head>
 <body>
 
-<!-- Mode banner (will be created dynamically) -->
-<div id="modeBanner" class="mode-banner" style="display: none;"></div>
+<nav class="navbar">
+    <div class="container">
+        <a href="#" class="logo">
+            <div class="logo-icon">SH</div>
+            <span class="logo-text">Shumane Holdings</span>
+        </a>
+        <button class="nav-toggle" id="navToggleBtn">☰</button>
+        <ul class="nav-links" id="navLinksList">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#training">Courses</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#apply" class="btn btn-primary" style="background: var(--secondary); color:white; padding: 8px 20px;">Enroll</a></li>
+        </ul>
+    </div>
+</nav>
 
-<!-- Main content container -->
-<div id="app"></div>
+<div class="hero-simple" id="home">
+    <div class="container">
+        <h1>PSIRA Security Training & Business Solutions</h1>
+        <p class="lead">Mabopane • Winterveld • Soshanguve • Pretoria</p>
+        <div class="mt-4">
+            <a href="#training" class="btn btn-primary">View Courses</a>
+            <a href="#contact" class="btn btn-outline" style="margin-left: 12px;">Contact Us</a>
+        </div>
+    </div>
+</div>
 
-<!-- Data-Free Version Template (lightweight, no external resources, no emojis) -->
-<template id="datafree-template">
-    <div class="datafree-nav">
-        <div class="datafree-container">
-            <a href="#" class="datafree-logo">
-                <div class="datafree-logo-icon">SH</div>
-                <span class="datafree-logo-text">Shumane Holdings</span>
-            </a>
-            <button class="datafree-nav-toggle">☰</button>
-            <ul class="datafree-nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#training">Courses</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#apply" style="background: #E67E22; color: white; padding: 6px 18px;">Enroll</a></li>
-            </ul>
+<div class="bg-light py-3">
+    <div class="container d-flex flex-wrap gap-3 justify-center">
+        <span class="geo-badge">Mabopane</span>
+        <span class="geo-badge">Winterveld</span>
+        <span class="geo-badge">Soshanguve</span>
+        <span class="geo-badge">Ga-Rankuwa</span>
+        <span class="geo-badge">Pretoria</span>
+    </div>
+</div>
+
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <span class="badge">Level 1 BBBEE | PSIRA Accredited</span>
+                <h2 class="section-title mt-3">Market Leader in Security & Business Support</h2>
+                <p>Shumane Holdings offers PSIRA‑accredited security training, medical waste removal, pest control, office stationery, and professional printing across Gauteng.</p>
+                <p><strong>Head Office:</strong> Mabopane Station, Court Office No. 459, 1st Floor, Block M, Old Mutual Centre</p>
+                <div class="d-flex gap-3 mt-3 flex-wrap">
+                    <span>Reg: 2020/620149/07</span>
+                    <span>PSIRA: 3171761 / T4334402</span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card text-center">
+                    <div class="service-icon">🏢</div>
+                    <h3>Shumane Holdings</h3>
+                    <p>Your trusted partner since 2020</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="hero-simple" id="home">
-        <div class="container">
-            <h1>PSIRA Security Training & Business Solutions</h1>
-            <p class="lead">Mabopane • Winterveld • Soshanguve • Pretoria</p>
-            <div class="mt-4">
-                <a href="#training" class="btn btn-primary">View Courses</a>
-                <a href="#contact" class="btn btn-outline" style="margin-left: 12px;">Contact Us</a>
+</section>
+
+<section id="services" class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title text-center">Our Services</h2>
+        </div>
+        <div class="row">
+            <div class="col-4"><div class="card"><div class="service-icon">🛡️</div><h3>Security Training</h3><p>PSIRA accredited Grades E‑A, firearm training.</p></div></div>
+            <div class="col-4"><div class="card"><div class="service-icon">🗑️</div><h3>Medical Waste</h3><p>Biohazard, sharps, pharmaceutical waste removal.</p></div></div>
+            <div class="col-4"><div class="card"><div class="service-icon">🐜</div><h3>Pest Control</h3><p>Fumigation, termite, rodent control.</p></div></div>
+            <div class="col-4"><div class="card"><div class="service-icon">✏️</div><h3>Office Stationery</h3><p>Complete office supplies and delivery.</p></div></div>
+            <div class="col-4"><div class="card"><div class="service-icon">🖨️</div><h3>Printing Services</h3><p>Digital printing, photocopying, binding.</p></div></div>
+            <div class="col-4"><div class="card"><div class="service-icon">🔫</div><h3>Firearm Training</h3><p>Handgun, shotgun, rifle training.</p></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="py-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="section-title text-center">Our Work in Action</h2>
+        </div>
+        <div class="row">
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🔫</div><p><strong>Firearm Training</strong></p></div></div>
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🗑️</div><p><strong>Medical Waste</strong></p></div></div>
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🐜</div><p><strong>Pest Control</strong></p></div></div>
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🖨️</div><p><strong>Printing Services</strong></p></div></div>
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🛡️</div><p><strong>Security Training</strong></p></div></div>
+            <div class="col-4"><div class="card text-center"><div class="service-icon">🚔</div><p><strong>Security Patrol</strong></p></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="training" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Security Training in Mabopane</h2>
+        <div class="row">
+            <div class="col-2">
+                <div class="card">
+                    <h3>Security Grades</h3>
+                    <div class="price-item">Grade E, D - R1300</div>
+                    <div class="price-item">Grade C - R1000</div>
+                    <div class="price-item">Grade E, D & C (Combo) - R2200</div>
+                    <div class="price-item">Grade B - R1300</div>
+                    <div class="price-item">Grade A - R1500</div>
+                    <div class="price-item" style="background:#fff3e0; font-weight:bold;">Full Grades (E-A) - R4500</div>
+                </div>
+                <div class="card mt-3">
+                    <h3>Firearm Training</h3>
+                    <div class="price-item">Hand Gun / Shot Gun / Rifle - R2500 each</div>
+                    <div class="price-item">Combo (any 2) - R4500</div>
+                    <div class="price-item">Combo (all 3) - R5500</div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <h3>Why train with us?</h3>
+                    <ul class="list-unstyled" style="margin-top: 1rem;">
+                        <li>✓ PSIRA accredited (3171761/T4334402)</li>
+                        <li>✓ Experienced trainers</li>
+                        <li>✓ On‑site training available</li>
+                        <li>✓ Combo discounts</li>
+                    </ul>
+                    <div class="badge mt-3">Next intake: 15 April 2026</div>
+                    <p class="mt-3"><strong>Requirements:</strong> Certified ID copy + R800 deposit</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="bg-light py-3">
-        <div class="container d-flex flex-wrap gap-3 justify-center">
-            <span class="geo-badge">Mabopane</span>
-            <span class="geo-badge">Winterveld</span>
-            <span class="geo-badge">Soshanguve</span>
-            <span class="geo-badge">Ga-Rankuwa</span>
-            <span class="geo-badge">Pretoria</span>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-2"><div class="card"><h3>Printing Price List</h3><ul class="list-unstyled" style="margin-top: 1rem;"><li>Photocopy (B&W): R2/page</li><li>Photocopy (Colour): R6/page</li><li>Printout (B&W): R2/page</li><li>Printout (Colour): R6/page</li><li>Scanning: R3/page</li><li>Typing: R20/page</li><li>Lamination: R10/A4</li></ul></div></div>
+            <div class="col-2"><div class="card"><h3>Current Specials</h3><p><strong>Grade E, D & C combo:</strong> R2200 (save R300)<br><strong>Full Grades (E-A):</strong> R4500<br><strong>Firearm combo (any 2):</strong> R4500</p><div class="badge mt-2">Limited seats available</div></div></div>
         </div>
     </div>
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <span class="badge">Level 1 BBBEE | PSIRA Accredited</span>
-                    <h2 class="section-title mt-3">Market Leader in Security & Business Support</h2>
-                    <p>Shumane Holdings offers PSIRA‑accredited security training, medical waste removal, pest control, office stationery, and professional printing across Gauteng.</p>
-                    <p><strong>Head Office:</strong> Mabopane Station, Court Office No. 459, 1st Floor, Block M, Old Mutual Centre</p>
-                    <div class="d-flex gap-3 mt-3 flex-wrap">
-                        <span>Reg: 2020/620149/07</span>
-                        <span>PSIRA: 3171761 / T4334402</span>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="card text-center">
-                        <div class="service-icon">🏢</div>
-                        <h3>Shumane Holdings</h3>
-                        <p>Your trusted partner since 2020</p>
-                    </div>
-                </div>
-            </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title text-center">What Clients Say</h2>
+        <div class="row mt-4">
+            <div class="col-4"><div class="card"><p>"Completed Grade C training. They helped me register with PSIRA and I got employed within weeks."</p><strong>— Thabo M., Soshanguve</strong></div></div>
+            <div class="col-4"><div class="card"><p>"Medical waste disposal is always on time and professional. Highly recommend."</p><strong>— Dr. Nkosi, Pretoria</strong></div></div>
+            <div class="col-4"><div class="card"><p>"Pest control team solved our termite issue quickly. Excellent service."</p><strong>— Lerato D., Winterveld</strong></div></div>
         </div>
-    </section>
-    <section id="services" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-4">
-                <h2 class="section-title text-center">Our Services</h2>
-            </div>
-            <div class="row">
-                <div class="col-4"><div class="card"><div class="service-icon">🛡️</div><h3>Security Training</h3><p>PSIRA accredited Grades E‑A, firearm training.</p></div></div>
-                <div class="col-4"><div class="card"><div class="service-icon">🗑️</div><h3>Medical Waste</h3><p>Biohazard, sharps, pharmaceutical waste removal.</p></div></div>
-                <div class="col-4"><div class="card"><div class="service-icon">🐜</div><h3>Pest Control</h3><p>Fumigation, termite, rodent control.</p></div></div>
-                <div class="col-4"><div class="card"><div class="service-icon">✏️</div><h3>Office Stationery</h3><p>Complete office supplies and delivery.</p></div></div>
-                <div class="col-4"><div class="card"><div class="service-icon">🖨️</div><h3>Printing Services</h3><p>Digital printing, photocopying, binding.</p></div></div>
-                <div class="col-4"><div class="card"><div class="service-icon">🔫</div><h3>Firearm Training</h3><p>Handgun, shotgun, rifle training.</p></div></div>
-            </div>
-        </div>
-    </section>
-    <section id="gallery" class="py-5">
-        <div class="container">
-            <div class="text-center mb-4">
-                <h2 class="section-title text-center">Our Work in Action</h2>
-            </div>
-            <div class="row">
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🔫</div><p><strong>Firearm Training</strong></p></div></div>
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🗑️</div><p><strong>Medical Waste</strong></p></div></div>
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🐜</div><p><strong>Pest Control</strong></p></div></div>
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🖨️</div><p><strong>Printing Services</strong></p></div></div>
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🛡️</div><p><strong>Security Training</strong></p></div></div>
-                <div class="col-4"><div class="card text-center"><div class="service-icon">🚔</div><p><strong>Security Patrol</strong></p></div></div>
-            </div>
-        </div>
-    </section>
-    <section id="training" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title">Security Training in Mabopane</h2>
-            <div class="row">
-                <div class="col-2">
-                    <div class="card">
-                        <h3>Security Grades</h3>
-                        <div class="price-item">Grade E, D - R1300</div>
-                        <div class="price-item">Grade C - R1000</div>
-                        <div class="price-item">Grade E, D & C (Combo) - R2200</div>
-                        <div class="price-item">Grade B - R1300</div>
-                        <div class="price-item">Grade A - R1500</div>
-                        <div class="price-item" style="background:#fff3e0; font-weight:bold;">Full Grades (E-A) - R4500</div>
-                    </div>
-                    <div class="card mt-3">
-                        <h3>Firearm Training</h3>
-                        <div class="price-item">Hand Gun / Shot Gun / Rifle - R2500 each</div>
-                        <div class="price-item">Combo (any 2) - R4500</div>
-                        <div class="price-item">Combo (all 3) - R5500</div>
-                    </div>
+    </div>
+</section>
+
+<section id="apply" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="card">
+                    <h3>Book an Appointment</h3>
+                    <form id="appointmentFormDF" onsubmit="return false;">
+                        <input type="text" id="appNameDF" class="form-control" placeholder="Full Name *" required>
+                        <input type="email" id="appEmailDF" class="form-control" placeholder="Email *" required>
+                        <input type="tel" id="appPhoneDF" class="form-control" placeholder="Phone">
+                        <input type="date" id="appDateDF" class="form-control" required>
+                        <button type="button" class="btn btn-primary w-100" onclick="submitAppointmentDF()">Request Appointment</button>
+                    </form>
                 </div>
-                <div class="col-2">
-                    <div class="card">
-                        <h3>Why train with us?</h3>
-                        <ul class="list-unstyled" style="margin-top: 1rem;">
-                            <li>✓ PSIRA accredited (3171761/T4334402)</li>
-                            <li>✓ Experienced trainers</li>
-                            <li>✓ On‑site training available</li>
-                            <li>✓ Combo discounts</li>
-                        </ul>
-                        <div class="badge mt-3">Next intake: 15 April 2026</div>
-                        <p class="mt-3"><strong>Requirements:</strong> Certified ID copy + R800 deposit</p>
-                    </div>
+            </div>
+            <div class="col-2">
+                <div class="card">
+                    <h3>Apply for a Course</h3>
+                    <form id="courseFormDF" onsubmit="return false;">
+                        <input type="text" id="courseNameDF" class="form-control" placeholder="Full Name *" required>
+                        <input type="email" id="courseEmailDF" class="form-control" placeholder="Email *" required>
+                        <input type="tel" id="coursePhoneDF" class="form-control" placeholder="Phone *" required>
+                        <select id="courseSelectDF" class="form-control">
+                            <option>Grade E, D</option><option>Grade C</option><option>Grade E,D,C Combo</option>
+                            <option>Grade B</option><option>Grade A</option><option>Full Grades</option>
+                            <option>Hand Gun</option><option>Shot Gun/Rifle</option>
+                        </select>
+                        <button type="button" class="btn btn-primary w-100" onclick="submitCourseDF()">Submit Application</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-2"><div class="card"><h3>Printing Price List</h3><ul class="list-unstyled" style="margin-top: 1rem;"><li>Photocopy (B&W): R2/page</li><li>Photocopy (Colour): R6/page</li><li>Printout (B&W): R2/page</li><li>Printout (Colour): R6/page</li><li>Scanning: R3/page</li><li>Typing: R20/page</li><li>Lamination: R10/A4</li></ul></div></div>
-                <div class="col-2"><div class="card"><h3>Current Specials</h3><p><strong>Grade E, D & C combo:</strong> R2200 (save R300)<br><strong>Full Grades (E-A):</strong> R4500<br><strong>Firearm combo (any 2):</strong> R4500</p><div class="badge mt-2">Limited seats available</div></div></div>
+    </div>
+</section>
+
+<section id="contact" class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <h2 class="section-title">Get in Touch</h2>
+                <p><strong>Mabopane Station, Court Office No. 459, 1st Floor, Block M</strong></p>
+                <p>📞 087 147 4568</p>
+                <p>💬 065 593 8665 (WhatsApp)</p>
+                <p>✉️ info@shumaneholdings.com</p>
+                <p><strong>Hours:</strong> Mon‑Fri 07:30–17:00 | Sat 08:00–13:00</p>
             </div>
-        </div>
-    </section>
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center">What Clients Say</h2>
-            <div class="row mt-4">
-                <div class="col-4"><div class="card"><p>"Completed Grade C training. They helped me register with PSIRA and I got employed within weeks."</p><strong>— Thabo M., Soshanguve</strong></div></div>
-                <div class="col-4"><div class="card"><p>"Medical waste disposal is always on time and professional. Highly recommend."</p><strong>— Dr. Nkosi, Pretoria</strong></div></div>
-                <div class="col-4"><div class="card"><p>"Pest control team solved our termite issue quickly. Excellent service."</p><strong>— Lerato D., Winterveld</strong></div></div>
-            </div>
-        </div>
-    </section>
-    <section id="apply" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <div class="card">
-                        <h3>Book an Appointment</h3>
-                        <form id="appointmentFormDF" onsubmit="return false;">
-                            <input type="text" id="appNameDF" class="form-control" placeholder="Full Name *" required>
-                            <input type="email" id="appEmailDF" class="form-control" placeholder="Email *" required>
-                            <input type="tel" id="appPhoneDF" class="form-control" placeholder="Phone">
-                            <input type="date" id="appDateDF" class="form-control" required>
-                            <button type="button" class="btn btn-primary w-100" onclick="submitAppointmentDF()">Request Appointment</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="card">
-                        <h3>Apply for a Course</h3>
-                        <form id="courseFormDF" onsubmit="return false;">
-                            <input type="text" id="courseNameDF" class="form-control" placeholder="Full Name *" required>
-                            <input type="email" id="courseEmailDF" class="form-control" placeholder="Email *" required>
-                            <input type="tel" id="coursePhoneDF" class="form-control" placeholder="Phone *" required>
-                            <select id="courseSelectDF" class="form-control">
-                                <option>Grade E, D</option><option>Grade C</option><option>Grade E,D,C Combo</option>
-                                <option>Grade B</option><option>Grade A</option><option>Full Grades</option>
-                                <option>Hand Gun</option><option>Shot Gun/Rifle</option>
-                            </select>
-                            <button type="button" class="btn btn-primary w-100" onclick="submitCourseDF()">Submit Application</button>
-                        </form>
-                    </div>
+            <div class="col-2">
+                <div class="card">
+                    <h3>Banking Details</h3>
+                    <p><strong>Bank:</strong> Capitec Bank</p>
+                    <p><strong>Account Holder:</strong> Shumane Holdings</p>
+                    <p><strong>Account Number:</strong> 1053383355</p>
+                    <p><strong>Account Type:</strong> Transact</p>
+                    <p class="mt-2 small">Use your name as reference when paying.</p>
                 </div>
             </div>
         </div>
-    </section>
-    <section id="contact" class="py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
-                    <h2 class="section-title">Get in Touch</h2>
-                    <p><strong>Mabopane Station, Court Office No. 459, 1st Floor, Block M</strong></p>
-                    <p>📞 087 147 4568</p>
-                    <p>💬 065 593 8665 (WhatsApp)</p>
-                    <p>✉️ info@shumaneholdings.com</p>
-                    <p><strong>Hours:</strong> Mon‑Fri 07:30–17:00 | Sat 08:00–13:00</p>
-                </div>
-                <div class="col-2">
-                    <div class="card">
-                        <h3>Banking Details</h3>
-                        <p><strong>Bank:</strong> Capitec Bank</p>
-                        <p><strong>Account Holder:</strong> Shumane Holdings</p>
-                        <p><strong>Account Number:</strong> 1053383355</p>
-                        <p><strong>Account Type:</strong> Transact</p>
-                        <p class="mt-2 small">Use your name as reference when paying.</p>
-                    </div>
-                </div>
-            </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-3"><div class="logo-icon" style="background: var(--secondary);">SH</div><p class="mt-2">Level 1 BBBEE | PSIRA Accredited</p><p>Reg: 2020/620149/07</p></div>
+            <div class="col-3"><h4>Quick Links</h4><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li></ul></div>
+            <div class="col-3"><h4>Contact</h4><p>087 147 4568<br>info@shumaneholdings.com</p></div>
         </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-3"><div class="datafree-logo-icon" style="background: #E67E22;">SH</div><p class="mt-2">Level 1 BBBEE | PSIRA Accredited</p><p>Reg: 2020/620149/07</p></div>
-                <div class="col-3"><h4>Quick Links</h4><ul class="list-unstyled"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#training">Courses</a></li></ul></div>
-                <div class="col-3"><h4>Contact</h4><p>087 147 4568<br>info@shumaneholdings.com</p></div>
-            </div>
-            <hr style="margin: 1rem 0; opacity:0.2;">
-            <div class="text-center">© 2026 Shumane Holdings – Data‑Free Mode Active | No Data Charges Apply</div>
-        </div>
-    </footer>
-</template>
+        <hr style="margin: 1rem 0; opacity:0.2;">
+        <div class="text-center">© 2026 Shumane Holdings – Data‑Free Mode Active | No Data Charges Apply</div>
+    </div>
+</footer>
+
+<a href="https://wa.me/27655938665" class="whatsapp-float" target="_blank">💬</a>
+
+<button id="switchToFull" class="mode-switch-btn">Switch to Full Version</button>
 
 <script>
-    // Global variables
-    let currentMode = 'auto';
-    let isOnline = navigator.onLine;
-    let fullVersionLoaded = false;
-
-    const banner = document.getElementById('modeBanner');
-
-    // Show/hide banner and update text
-    function updateBanner(mode) {
-        if (mode === 'data-free') {
-            banner.textContent = 'DATA-FREE MODE ACTIVE - No mobile data charges apply. Click here to switch to Full Version if you have internet.';
-            banner.style.display = 'block';
-            banner.setAttribute('data-mode', 'datafree');
-            banner.style.background = '#2C9B77';
-            banner.onclick = () => switchToConnected();
-        } else {
-            banner.textContent = 'FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.';
-            banner.style.display = 'block';
-            banner.setAttribute('data-mode', 'connected');
-            banner.style.background = '#E67E22';
-            banner.onclick = () => switchToDataFree();
-        }
+    // Nav toggle
+    const toggleBtn = document.getElementById('navToggleBtn');
+    const navLinks = document.getElementById('navLinksList');
+    if (toggleBtn && navLinks) {
+        toggleBtn.onclick = () => navLinks.classList.toggle('show');
     }
 
-    // Load data-free version from template
-    function loadDataFreeVersion() {
-        const template = document.getElementById('datafree-template');
-        const clone = template.content.cloneNode(true);
-        const appDiv = document.getElementById('app');
-        appDiv.innerHTML = '';
-        appDiv.appendChild(clone);
-        fullVersionLoaded = false;
-        updateBanner('data-free');
-        attachDataFreeNavToggle();
-        attachSmoothScroll();
-    }
-
-    // Load full version by fetching full-version.html and injecting it
-    async function loadFullVersion() {
-        try {
-            const response = await fetch('full-version.html');
-            if (!response.ok) throw new Error('Failed to load full version');
-            let html = await response.text();
-
-            // Inject the banner after the body tag (so it appears at the very top)
-            // We'll add a small script to adjust body padding because the full version's navbar is fixed.
-            // We'll also ensure the banner is visible by adding it right after <body>.
-            const bannerHtml = `<div id="fullVersionBanner" class="mode-banner" style="display: block; background: #E67E22;">FULL VERSION ACTIVE - Uses internet connection. Click here to switch to Data-Free Mode to save data.</div>`;
-            // Insert after <body> opening tag
-            html = html.replace(/<body[^>]*>/i, match => match + bannerHtml);
-
-            // Also add a script to adjust body padding and attach banner click handler
-            const scriptFix = `<script>
-                // Adjust body padding for the banner
-                document.body.style.paddingTop = '40px';
-                // Attach click handler to the banner
-                const bannerElem = document.getElementById('fullVersionBanner');
-                if (bannerElem) {
-                    bannerElem.onclick = function() { window.dispatchEvent(new CustomEvent('switchToDataFree')); };
-                }
-                // Re-initialize any scripts that depend on DOM (like Swiper, AOS) after full load
-                if (typeof AOS !== 'undefined') AOS.refresh();
-                if (typeof Swiper !== 'undefined') {
-                    new Swiper('.hero-swiper', { effect: 'fade', loop: true, autoplay: { delay: 6000 } });
-                }
-            <\/script>`;
-            // Insert before closing </body> to ensure DOM is ready
-            html = html.replace(/<\/body>/i, scriptFix + '</body>');
-
-            // Replace the app container content
-            const appDiv = document.getElementById('app');
-            appDiv.innerHTML = html;
-
-            fullVersionLoaded = true;
-            updateBanner('connected'); // we already have a banner, but we need to hide our original banner? Actually we injected a separate banner, but we can still keep the original hidden. Let's hide the original one.
-            document.getElementById('modeBanner').style.display = 'none';
-
-            // We also need to listen for the custom event dispatched from the injected banner's onclick
-            window.addEventListener('switchToDataFree', () => switchToDataFree());
-        } catch (error) {
-            console.error('Error loading full version:', error);
-            // Fallback to data-free
-            loadDataFreeVersion();
-        }
-    }
-
-    // Load version based on connection and mode
-    async function loadVersion(mode) {
-        if (mode === 'data-free' || (mode === 'auto' && !isOnline)) {
-            loadDataFreeVersion();
-            currentMode = 'data-free';
-        } else {
-            await loadFullVersion();
-            currentMode = 'connected';
-        }
-    }
-
-    function switchToDataFree() {
-        isOnline = false;
-        loadVersion('data-free');
-    }
-
-    function switchToConnected() {
-        isOnline = true;
-        loadVersion('connected');
-    }
-
-    // Helpers for data-free version
-    function attachDataFreeNavToggle() {
-        const toggleBtn = document.querySelector('.datafree-nav-toggle');
-        const navLinks = document.querySelector('.datafree-nav-links');
-        if (toggleBtn && navLinks) {
-            toggleBtn.onclick = () => navLinks.classList.toggle('show');
-        }
-    }
-
-    function attachSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.removeEventListener('click', handleSmoothScroll);
-            anchor.addEventListener('click', handleSmoothScroll);
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-    }
-
-    function handleSmoothScroll(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        const target = document.querySelector(targetId);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // Listen for online/offline events
-    window.addEventListener('online', () => {
-        isOnline = true;
-        if (currentMode !== 'connected') loadVersion('connected');
-    });
-    window.addEventListener('offline', () => {
-        isOnline = false;
-        loadVersion('data-free');
     });
 
-    // Global functions for data-free forms
+    // Form functions
     window.submitAppointmentDF = function() {
         let name = document.getElementById('appNameDF')?.value;
         if (!name) return alert('Please fill required fields');
@@ -512,8 +378,10 @@
             '%0ACourse: ' + encodeURIComponent(document.getElementById('courseSelectDF').value);
     };
 
-    // Initial load
-    loadVersion('auto');
+    // Switch to full version
+    document.getElementById('switchToFull').addEventListener('click', function() {
+        window.location.href = 'full-version.html';
+    });
 </script>
 </body>
 </html>
